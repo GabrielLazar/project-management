@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <div th:replace="/fragments/head:: head">
+    </div>
+    <title>Ticketing Project</title>
+</head>
+
+<body>
+<!-- ============================================================== -->
+<!-- main wrapper -->
+<!-- ============================================================== -->
+<div class="dashboard-main-wrapper">
+    <!-- ============================================================== -->
+    <!-- navbar -->
+    <!-- ============================================================== -->
+    <div class="dashboard-header">
+        <nav class="navbar navbar-expand-lg bg-white fixed-top">
+            <div>
+                <a href="#">
+                    <img class="logo-img" th:src="@{/images/Project_Management.jpg}" height="60" alt="logo">
+                </a>
+            </div>
+            <div class="navbar-brand" style="color: deepskyblue">
+                Project Management
+            </div>
+
+            <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto navbar-right-top">
+                    <li class="nav-item dropdown nav-user">
+                        <a
+                                class="nav-link nav-user-img"
+                                href="#"
+                                id="navbarDropdownMenuLink2"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                        ><i class="fa fa-ellipsis-v" aria-hidden="true" style="color: deepskyblue"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right nav-user-dropdown"
+                             aria-labelledby="navbarDropdownMenuLink2">
+                            <div class="nav-user-info" style="background: deepskyblue">
+                                <h5 class="mb-0 text-white nav-user-name" ></h5>
+                                <!-- th:text="${user.userName}" -->
+                            </div>
+                            <a class="dropdown-item" href="#"
+                            ><i class="fas fa-user mr-2"></i>Account</a>
+                            <a class="dropdown-item" th:href="@{/}"
+                            ><i class="fas fa-power-off mr-2"></i>Logout</a
+                            >
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end navbar -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- left sidebar -->
+    <!-- ============================================================== -->
+    <div th:replace="/fragments/side-bar :: sidebar">
+    </div>
+    <!-- ============================================================== -->
+    <!-- end left sidebar -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- wrapper  -->
+    <!-- ============================================================== -->
+    <div class="dashboard-wrapper">
+        <div class="dashboard-ecommerce">
+            <div class="container-fluid dashboard-content">
+                <!-- ============================================================== -->
+                <!-- pageheader  -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="page-header">
+                            <h2 class="mb-2">Create User</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-lg-12 col-md-12 col-sm-12" >
+                        <form>
+                            <div class="row">
+                                <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label for="firstName" class="col-form-label">First Name</label>
+                                        <input id="firstName" placeholder="First Name" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label for="lastName" class="col-form-label">Last Name</label>
+                                        <input id="lastName" placeholder="Last Name" type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label for="email_address" class="col-form-label">Email Address</label>
+                                        <input id="email_address" placeholder="Email Address" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label for="phone_number" class="col-form-label">Phone Number</label>
+                                        <input id="phone_number" placeholder="Phone Number" type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label for="password" class="col-form-label">Password</label>
+                                        <input id="password" placeholder="Password" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label for="confirm_password" class="col-form-label">Confirm Password</label>
+                                        <input id="confirm_password" placeholder="Confirm your Password"  type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label>Choose a role</label>
+                                        <select name="roleId" id="role_id" class="custom-select" required="required">
+                                            <option value="select" selected="selected">Select</option>
+                                            <option value="admin">Admin</option>
+                                            <option value="manager">Manager</option>
+                                            <option value="employee">Employee</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+
+                                        <label>Gender</label>
+                                        <br>
+                                        <label class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" name="radio-inline" checked="" class="custom-control-input">
+                                            <span class="custom-control-label">Male</span>
+                                        </label>
+                                        <label class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" name="radio-inline" class="custom-control-input">
+                                            <span class="custom-control-label">Female</span>
+                                        </label>
+
+                                        <div class="float-right">
+                                            <button type="button" class="btn btn-success">Save</button>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="page-header">
+                            <h2 class="mb-2" >User List</h2>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Mark</td>
+                        <td>Otto@gmail.com</td>
+                        <td>Male</td>
+                        <td>123456789</td>
+                        <td>Employee</td>
+                        <td class="actions">
+                            <a href=""><button type="button" class="btn btn-warning btn-sm">Update</button></a>
+                            <a href="" class="delete-row"><button type="button" class="btn btn-secondary btn-sm">Delete</button></a>
+                        </td>
+
+                    </tr>
+
+
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+
+                <!-- ============================================================== -->
+                <!-- end pageheader  -->
+                <!-- ============================================================== -->
+
+
+                <!-- ============================================================== -->
+
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- end wrapper  -->
+            <!-- ============================================================== -->
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end main wrapper  -->
+    <!-- ============================================================== -->
+    <div th:replace="fragments/javascript :: js">
+    </div>
+</div>
+</body>
+</html>
+
+
+

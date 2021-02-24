@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <div th:replace="/fragments/head:: head">
+    </div>
+    <title>Ticketing Project</title>
+</head>
+
+<body>
+<!-- ============================================================== -->
+<!-- main wrapper -->
+<!-- ============================================================== -->
+<div class="dashboard-main-wrapper">
+    <!-- ============================================================== -->
+    <!-- navbar -->
+    <!-- ============================================================== -->
+    <div class="dashboard-header">
+        <nav class="navbar navbar-expand-lg bg-white fixed-top">
+            <div>
+                <a href="#">
+                    <img class="logo-img" th:src="@{/images/Project_Management.jpg}" height="60" alt="logo">
+                </a>
+            </div>
+            <div class="navbar-brand" style="color: deepskyblue">
+                Project Management
+            </div>
+
+            <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto navbar-right-top">
+                    <li class="nav-item dropdown nav-user">
+                        <a
+                                class="nav-link nav-user-img"
+                                href="#"
+                                id="navbarDropdownMenuLink2"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                        ><i class="fa fa-ellipsis-v" aria-hidden="true" style="color: deepskyblue"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right nav-user-dropdown"
+                             aria-labelledby="navbarDropdownMenuLink2">
+                            <div class="nav-user-info" style="background: deepskyblue">
+                                <h5 class="mb-0 text-white nav-user-name" th:text="${user.userName}"></h5>
+                            </div>
+                            <a class="dropdown-item" href="#"
+                            ><i class="fas fa-user mr-2"></i>Account</a>
+                            <a class="dropdown-item" th:href="@{/}"
+                            ><i class="fas fa-power-off mr-2"></i>Logout</a
+                            >
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end navbar -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- left sidebar -->
+    <!-- ============================================================== -->
+        <div th:replace="/fragments/side-bar :: sidebar">
+        </div>
+    <!-- ============================================================== -->
+    <!-- end left sidebar -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- wrapper  -->
+    <!-- ============================================================== -->
+    <div class="dashboard-wrapper">
+        <div class="dashboard-ecommerce">
+            <div class="container-fluid dashboard-content">
+                <!-- ============================================================== -->
+                <!-- pageheader  -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="page-header">
+                            <h2 class="mb-2">User Create</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============================================================== -->
+                <!-- end pageheader  -->
+                <!-- ============================================================== -->
+
+
+                <!-- ============================================================== -->
+
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- end wrapper  -->
+            <!-- ============================================================== -->
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end main wrapper  -->
+    <!-- ============================================================== -->
+    <div th:replace="fragments/javascript :: js">
+    </div>
+</div>
+</body>
+</html>
