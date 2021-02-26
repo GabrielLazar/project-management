@@ -3,7 +3,7 @@
 <head>
     <div th:replace="/fragments/head:: head">
     </div>
-    <title>Ticketing Project</title>
+    <title>Create User</title>
 </head>
 
 <body>
@@ -14,57 +14,7 @@
     <!-- ============================================================== -->
     <!-- navbar -->
     <!-- ============================================================== -->
-    <div class="dashboard-header">
-        <nav class="navbar navbar-expand-lg bg-white fixed-top">
-            <div>
-                <a href="#">
-                    <img class="logo-img" th:src="@{/images/Project_Management.jpg}" height="60" alt="logo">
-                </a>
-            </div>
-            <div class="navbar-brand" style="color: deepskyblue">
-                Project Management
-            </div>
-
-            <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-            >
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto navbar-right-top">
-                    <li class="nav-item dropdown nav-user">
-                        <a
-                                class="nav-link nav-user-img"
-                                href="#"
-                                id="navbarDropdownMenuLink2"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                        ><i class="fa fa-ellipsis-v" aria-hidden="true" style="color: deepskyblue"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right nav-user-dropdown"
-                             aria-labelledby="navbarDropdownMenuLink2">
-                            <div class="nav-user-info" style="background: deepskyblue">
-                                <h5 class="mb-0 text-white nav-user-name" ></h5>
-                                <!-- th:text="${user.userName}" -->
-                            </div>
-                            <a class="dropdown-item" href="#"
-                            ><i class="fas fa-user mr-2"></i>Account</a>
-                            <a class="dropdown-item" th:href="@{/}"
-                            ><i class="fas fa-power-off mr-2"></i>Logout</a
-                            >
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+    <div th:replace="/fragments/navbar :: navbar"></div>
     <!-- ============================================================== -->
     <!-- end navbar -->
     <!-- ============================================================== -->
@@ -112,17 +62,32 @@
                             <div class="row">
                                 <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
                                     <div class="form-group">
+                                        <label for="username" class="col-form-label">Username</label>
+                                        <input id="username" placeholder="Username" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
                                         <label for="email_address" class="col-form-label">Email Address</label>
                                         <input id="email_address" placeholder="Email Address" type="text" class="form-control">
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
                                     <div class="form-group">
                                         <label for="phone_number" class="col-form-label">Phone Number</label>
                                         <input id="phone_number" placeholder="Phone Number" type="text" class="form-control">
                                     </div>
                                 </div>
+                                <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label for="birth_date" class="col-form-label">Birth Date</label>
+                                        <input id="birth_date" type="date" class="form-control">
+                                    </div>
+                                </div>
                             </div>
+
                             <div class="row">
                                 <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
                                     <div class="form-group">
@@ -189,6 +154,7 @@
                     <thead>
                     <tr>
                         <th scope="col">Name</th>
+                        <th scope="col">Username</th>
                         <th scope="col">Email</th>
                         <th scope="col">Gender</th>
                         <th scope="col">Phone</th>
@@ -199,6 +165,7 @@
                     <tbody>
                     <tr>
                         <td>Mark</td>
+                        <td>1234</td>
                         <td>Otto@gmail.com</td>
                         <td>Male</td>
                         <td>123456789</td>
