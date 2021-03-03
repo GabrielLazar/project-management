@@ -62,5 +62,10 @@ public class WebController {
         return "/task/create-task";
     }
 
+    @RequestMapping("archive")
+    public String getArchived(@ModelAttribute("user") UserDTO userDTO){
+        return "/employee/archive";
+    }
+
 
 }
