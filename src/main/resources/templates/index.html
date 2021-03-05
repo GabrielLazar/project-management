@@ -18,12 +18,12 @@
             <img class="logo-img" th:src="@{/images/Project_Management.jpg}" height="100" alt="logo">
         </div>
         <div class="card-body">
-            <form th:action="@{/}" method="POST" th:object="${user}">
+            <form th:action="@{/welcome}">
                 <div class="form-group">
-                    <input class="form-control form-control-lg" id="username" type="text" placeholder="Username" autocomplete="off" th:field="*{userName}">
+                    <input class="form-control form-control-lg" id="username" type="text" placeholder="Username" autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <input class="form-control form-control-lg" id="password" type="password" placeholder="Password" th:field="*{passWord}">
+                    <input class="form-control form-control-lg" id="password" type="password" placeholder="Password">
                 </div>
                 <div th:if="${check != null}">
                     <div class="alert alert-danger notification" role="alert" >

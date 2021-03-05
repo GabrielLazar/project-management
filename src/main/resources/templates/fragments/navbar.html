@@ -5,7 +5,7 @@
     <div class="dashboard-header">
         <nav class="navbar navbar-expand-lg bg-white fixed-top">
             <div>
-                <a href="#">
+                <a th:href="@{/welcome}">
                     <img class="logo-img" th:src="@{/images/Project_Management.jpg}" height="60" alt="logo">
                 </a>
             </div>
@@ -39,7 +39,7 @@
                         <div class="dropdown-menu dropdown-menu-right nav-user-dropdown"
                              aria-labelledby="navbarDropdownMenuLink2">
                             <div class="nav-user-info" style="background: deepskyblue">
-                                <h5 class="mb-0 text-white nav-user-name" th:text="${user.userName}"></h5>
+                                <h5 class="mb-0 text-white nav-user-name">Gabriel</h5>
                             </div>
                             <a class="dropdown-item" href="#"
                             ><i class="fas fa-user mr-2"></i>Account</a>
