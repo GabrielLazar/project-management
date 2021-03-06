@@ -5,10 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
@@ -30,5 +27,7 @@ public class User extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
 
-
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 }
