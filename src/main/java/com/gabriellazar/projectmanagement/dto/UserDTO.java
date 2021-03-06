@@ -1,8 +1,11 @@
 package com.gabriellazar.projectmanagement.dto;
 
+import com.gabriellazar.projectmanagement.enums.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 
@@ -19,11 +22,10 @@ public class UserDTO {
     private String email;
     private String confirmPassword;
     private Integer phoneNumber;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
     private boolean enabled;
     private String phone;
-
-
-
+    private Gender gender;
 
 }

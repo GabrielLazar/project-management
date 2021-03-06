@@ -42,21 +42,29 @@
                         </div>
                     </div>
                 </div>
+                <!-- ============================================================== -->
+                <!-- end pageheader  -->
+                <!-- ============================================================== -->
                 <div class="row" >
                     <div class="col-lg-12 col-md-12 col-sm-12" >
-                        
-                        <form>
+                        <form  class="needs-validation" th:object="${user}" method="post" th:action="@{/user/create-user}" novalidate>
                             <div class="row">
                                 <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
                                     <div class="form-group">
                                         <label for="firstName" class="col-form-label">First Name</label>
-                                        <input id="firstName" placeholder="First Name" type="text" class="form-control">
+                                        <input id="firstName" placeholder="First Name" type="text" class="form-control" th:field="*{firstName}" required>
+                                        <div class="invalid-feedback">
+                                            Please enter first name.
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
                                     <div class="form-group">
                                         <label for="lastName" class="col-form-label">Last Name</label>
-                                        <input id="lastName" placeholder="Last Name" type="text" class="form-control">
+                                        <input id="lastName" placeholder="Last Name" type="text" class="form-control" th:field="*{lastName}" required>
+                                        <div class="invalid-feedback">
+                                            Please enter last name.
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -64,13 +72,20 @@
                                 <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
                                     <div class="form-group">
                                         <label for="username" class="col-form-label">Username</label>
-                                        <input id="username" placeholder="Username" type="text" class="form-control">
+                                        <input id="username" placeholder="Username" type="text" class="form-control" th:field="*{userName}" required>
+                                        <div class="invalid-feedback">
+                                            Please enter user name.
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
                                     <div class="form-group">
                                         <label for="email_address" class="col-form-label">Email Address</label>
-                                        <input id="email_address" placeholder="Email Address" type="text" class="form-control">
+                                        <input id="email_address" placeholder="Email Address" type="text" class="form-control"
+                                               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" th:field="*{email}" required>
+                                        <div class="invalid-feedback">
+                                            Please enter a valid email address.
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -78,13 +93,20 @@
                                 <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
                                     <div class="form-group">
                                         <label for="phone_number" class="col-form-label">Phone Number</label>
-                                        <input id="phone_number" placeholder="Phone Number" type="text" class="form-control">
+                                        <input id="phone_number" placeholder="Phone Number" type="tel" class="form-control"
+                                               pattern="^\d{10}$" th:field="*{phoneNumber}" required>
+                                        <div class="invalid-feedback">
+                                            Please enter a 10 digit phone number.
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
                                     <div class="form-group">
                                         <label for="birth_date" class="col-form-label">Birth Date</label>
-                                        <input id="birth_date" type="date" class="form-control">
+                                        <input id="birth_date" type="date" class="form-control" th:field="*{birthDate}" required>
+                                        <div class="invalid-feedback">
+                                            Please enter birth date.
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -93,13 +115,21 @@
                                 <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
                                     <div class="form-group">
                                         <label for="password" class="col-form-label">Password</label>
-                                        <input id="password" placeholder="Password" type="text" class="form-control">
+                                        <input id="password" placeholder="Password" type="text" class="form-control"
+                                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}" th:field="*{password}" required>
+                                        <div class="invalid-feedback">
+                                            Please enter a password.
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
                                     <div class="form-group">
                                         <label for="confirm_password" class="col-form-label">Confirm Password</label>
-                                        <input id="confirm_password" placeholder="Confirm your Password"  type="text" class="form-control">
+                                        <input id="confirm_password" placeholder="Confirm your Password"  type="text" class="form-control"
+                                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}" th:field="*{confirmPassword}" required>
+                                        <div class="invalid-feedback">
+                                            Please confirm the password.
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -122,23 +152,18 @@
                                         <label>Gender</label>
                                         <br>
                                         <label class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" name="radio-inline" checked="" class="custom-control-input">
+                                            <input type="radio" name="radio-inline" checked="" class="custom-control-input" th:field="*{gender}" th:value="MALE">
                                             <span class="custom-control-label">Male</span>
                                         </label>
                                         <label class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" name="radio-inline" class="custom-control-input">
+                                            <input type="radio" name="radio-inline" class="custom-control-input" th:field="*{gender}" th:value="FEMALE">
                                             <span class="custom-control-label">Female</span>
                                         </label>
-
                                         <div class="float-right">
-                                            <button type="button" class="btn btn-success">Save</button>
+                                            <button type="submit" class="btn btn-success">Save</button>
                                         </div>
-
-
                                     </div>
-
                                 </div>
-
                             </div>
                         </form>
                     </div>
@@ -207,6 +232,27 @@
     </div>
 </div>
 </body>
+<script>
+    (function () {
+        'use strict'
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+
+</script>
 </html>
 
 
