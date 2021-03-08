@@ -116,7 +116,7 @@
                                     <div class="form-group">
                                         <label for="password" class="col-form-label">Password</label>
                                         <input id="password" placeholder="Password" type="text" class="form-control"
-                                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}" th:field="*{password}" required>
+                                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}" th:field="*{password}"  required>
                                         <div class="invalid-feedback">
                                             Please enter a password.
                                         </div>
@@ -130,6 +130,10 @@
                                         <div class="invalid-feedback">
                                             Please confirm the password.
                                         </div>
+                                        <div th:if="check">
+                                            Password needs to match confirm password.
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -246,12 +250,10 @@
                         event.preventDefault()
                         event.stopPropagation()
                     }
-
                     form.classList.add('was-validated')
                 }, false)
             })
     })()
-
 </script>
 </html>
 

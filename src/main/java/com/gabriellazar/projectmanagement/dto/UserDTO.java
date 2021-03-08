@@ -21,11 +21,10 @@ public class UserDTO {
     private String password;
     private String email;
     private String confirmPassword;
-    private Integer phoneNumber;
+    private String phoneNumber;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
     private boolean enabled;
-    private String phone;
     private Gender gender;
 
 }

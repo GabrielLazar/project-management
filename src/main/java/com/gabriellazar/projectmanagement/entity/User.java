@@ -20,7 +20,7 @@ public class User extends BaseEntity {
     private String userName;
     private String email;
     private LocalDate birthDate;
-    private Integer phoneNumber;
+    private String phoneNumber;
     private String password;
     private boolean enabled;
 
