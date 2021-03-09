@@ -1,6 +1,7 @@
 package com.gabriellazar.projectmanagement.services.impl;
 
 import com.gabriellazar.projectmanagement.dto.RoleDTO;
+import com.gabriellazar.projectmanagement.entity.Role;
 import com.gabriellazar.projectmanagement.mapper.MapperUtil;
 import com.gabriellazar.projectmanagement.repository.RoleRepository;
 import com.gabriellazar.projectmanagement.services.RoleService;
@@ -29,7 +30,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public RoleDTO getRoleById(Long id) {
-        return mapperUtil.convertToDTO(roleRepository.findById(id),new RoleDTO());
+    public RoleDTO findRoleById(Long id) {
+        return mapperUtil.convertToDTO(roleRepository.findById(id).get(),new RoleDTO());
     }
 }

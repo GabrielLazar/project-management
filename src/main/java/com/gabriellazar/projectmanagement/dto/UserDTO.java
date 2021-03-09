@@ -22,6 +22,7 @@ public class UserDTO {
     private String confirmPassword;
     private String email;
     private String phoneNumber;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
     private boolean enabled;
