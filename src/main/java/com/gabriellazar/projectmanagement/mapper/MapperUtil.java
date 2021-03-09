@@ -2,9 +2,11 @@ package com.gabriellazar.projectmanagement.mapper;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Type;
 
+@Component
 public class MapperUtil {
 
     private ModelMapper modelMapper;
@@ -14,7 +16,10 @@ public class MapperUtil {
         this.modelMapper = modelMapper;
     }
 
-    <T> T convertToEntity(Object objectToBeConverted,T convertedObject){
+   public <T> T convertToEntity(Object objectToBeConverted,T convertedObject){
       return   modelMapper.map(objectToBeConverted,(Type) convertedObject.getClass());
+    }
+    public <T> T convertToDTO(Object objectToBeConverted,T convertedObject){
+        return   modelMapper.map(objectToBeConverted,(Type) convertedObject.getClass());
     }
 }

@@ -118,7 +118,7 @@
                                         <input id="password" placeholder="Password" type="text" class="form-control"
                                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}" th:field="*{password}"  required>
                                         <div class="invalid-feedback">
-                                            Please enter a password.
+                                            Must contain at least one number and one uppercase and lowercase letter, and at least 4 or more characters.
                                         </div>
                                     </div>
                                 </div>
@@ -130,10 +130,6 @@
                                         <div class="invalid-feedback">
                                             Please confirm the password.
                                         </div>
-                                        <div th:if="check">
-                                            Password needs to match confirm password.
-                                        </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -141,11 +137,9 @@
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label>Choose a role</label>
-                                        <select name="roleId" id="role_id" class="custom-select" required="required">
-                                            <option value="select" selected="selected">Select</option>
-                                            <option value="admin">Admin</option>
-                                            <option value="manager">Manager</option>
-                                            <option value="employee">Employee</option>
+                                        <select th:field="*{role}" class="custom-select" required="required">
+                                            <option th:value=" ''" th:text="Select"></option>
+                                            <option th:each="user_role : ${roles}" th:value="${user_role.id}" th:text="${user_role.description}"></option>
                                         </select>
                                     </div>
                                 </div>
