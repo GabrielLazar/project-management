@@ -7,9 +7,7 @@ import com.gabriellazar.projectmanagement.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -34,7 +32,7 @@ public class UserController {
     }
 
     @PostMapping("/create-user")
-    public String insertUser(UserDTO userDTO,Model model){
+    public String insertUser(UserDTO userDTO){
 //        boolean check = false;
 //        if(!userDTO.getPassword().equals(userDTO.getConfirmPassword())){
 //            check = true;
@@ -42,9 +40,13 @@ public class UserController {
 //        }
 
         userService.saveUser(userDTO);
-        model.addAttribute("user",new UserDTO());
-        model.addAttribute("roles",roleService.getAllRoles());
-        model.addAttribute("users",userService.getAllUsers());
-        return "/administration/user/create-user";
+        return "redirect:/user/create-user";
     }
+
+    @GetMapping("/delete-user/{id}")
+    public String deleteUser(@PathVariable("id") Long id){
+        userService.deleteUserById(id);
+        return "redirect:/user/create-user";
+    }
+
 }

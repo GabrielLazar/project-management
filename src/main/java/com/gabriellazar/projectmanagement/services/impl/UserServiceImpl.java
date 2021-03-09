@@ -31,11 +31,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO findByUserName(String username) {
-        return mapperUtil.convertToDTO(userRepository.findByUserName(username),new UserDTO());
+        return mapperUtil.convertToDTO(userRepository.findByUserName(username).get(),new UserDTO());
     }
 
     @Override
     public void saveUser(UserDTO userDTO) {
         userRepository.saveAndFlush(mapperUtil.convertToEntity(userDTO,new User()));
+    }
+
+    @Override
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
     }
 }
