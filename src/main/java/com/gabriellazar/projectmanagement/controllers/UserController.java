@@ -49,4 +49,11 @@ public class UserController {
         return "redirect:/user/create-user";
     }
 
+    @GetMapping("/update-user/{id}")
+    public String updateUser(@PathVariable("id") Long id){
+
+        return "redirect:/user/create-user";
+    }
+
+
 }

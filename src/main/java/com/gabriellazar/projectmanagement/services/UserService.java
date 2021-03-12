@@ -10,7 +10,10 @@ import java.util.*;
 public interface UserService {
 
     List<UserDTO> getAllUsers();
-    UserDTO findByUserName(String username);
+    UserDTO findUserByName(String username);
     void saveUser(UserDTO userDTO);
+    UserDTO updateUser(UserDTO userDTO);
     void deleteUserById(Long id);
+
+
 }
