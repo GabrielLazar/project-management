@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserService {
         List<User> users = userRepository.findAll();
        return userRepository.findAll().stream()
                .map(user -> mapperUtil.convertToDTO(user,new UserDTO()))
+               .sorted((u1,u2) -> u2.getId().compareTo(u1.getId()))
                .collect(Collectors.toList());
     }
 
