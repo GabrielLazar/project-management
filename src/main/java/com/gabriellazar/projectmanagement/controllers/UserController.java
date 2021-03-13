@@ -54,6 +54,7 @@ public class UserController {
     @GetMapping("/update-user/{id}")
     public String editUser(@PathVariable("id") Long id, Model model){
         UserDTO userDTO = userService.findUserById(id);
+        userDTO.setPassword("");
         model.addAttribute("user",userDTO);
         model.addAttribute("roles",roleService.getAllRoles());
         model.addAttribute("users",userService.getAllUsers());

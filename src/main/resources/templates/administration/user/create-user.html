@@ -127,7 +127,7 @@
                                         <input id="confirm_password" placeholder="Confirm your Password"  type="text" class="form-control"
                                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}" th:field="*{confirmPassword}" required>
                                         <div class="invalid-feedback">
-                                            Please confirm the password.
+                                            Must match the password.
                                         </div>
                                     </div>
                                 </div>
@@ -184,15 +184,22 @@
                     </thead>
                     <tbody>
                     <tr th:each="user : ${users}">
-                        <td th:text="${user.firstName + ' ' + user.lastName}"></td>
+                        <td th:text="${#strings.capitalize(user.firstName) + ' ' + #strings.capitalize(user.lastName)}"></td>
                         <td th:text="${user.userName}"></td>
                         <td th:text="${user.email}"></td>
-                        <td th:text="${user.gender}"></td>
+                        <td th:text="${#strings.capitalize(user.gender.value)}"></td>
                         <td th:text="${user.phoneNumber}"></td>
                         <td th:text="${user.role.description}"></td>
                         <td class="actions">
                             <a th:href="@{/user/update-user/{id}(id=${user.id})}"><button type="button" class="btn btn-warning btn-sm" th:text="Update"></button></a>
-                            <a th:href="@{/user/delete-user/{id}(id=${user.id})}" class="delete-row"><button type="button" class="btn btn-secondary btn-sm" th:text="Delete"></button></a>
+                            <a th:href="@{/user/delete-user/{id}(id=${user.id})}"
+                               th:data-confirm-delete="|Are you sure you want to delete user: ${user.userName}?|"
+                               onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false"
+                            >
+
+                                <button type="button" class="btn btn-secondary btn-sm" th:text="Delete">
+                                </button>
+                            </a>
                         </td>
                     </tr>
                     </tbody>
@@ -229,6 +236,9 @@
             .forEach(function (form) {
                 form.addEventListener('submit', function (event) {
                     if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }  else if(document.getElementById("password").value != document.getElementById("confirm_password").value){
                         event.preventDefault()
                         event.stopPropagation()
                     }

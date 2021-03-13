@@ -2,7 +2,7 @@ package com.gabriellazar.projectmanagement.enums;
 
 public enum Gender {
 
-    MALE("MALE"),FEMALE("FEMALE");
+    MALE("Male"),FEMALE("Female");
 
     private final String value;
 
