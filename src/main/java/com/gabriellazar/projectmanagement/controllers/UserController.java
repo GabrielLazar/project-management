@@ -2,6 +2,8 @@ package com.gabriellazar.projectmanagement.controllers;
 
 
 import com.gabriellazar.projectmanagement.dto.UserDTO;
+import com.gabriellazar.projectmanagement.entity.User;
+import com.gabriellazar.projectmanagement.mapper.MapperUtil;
 import com.gabriellazar.projectmanagement.services.RoleService;
 import com.gabriellazar.projectmanagement.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,9 +52,23 @@ public class UserController {
     }
 
     @GetMapping("/update-user/{id}")
-    public String updateUser(@PathVariable("id") Long id){
+    public String editUser(@PathVariable("id") Long id, Model model){
+        UserDTO userDTO = userService.findUserById(id);
+        model.addAttribute("user",userDTO);
+        model.addAttribute("roles",roleService.getAllRoles());
+        model.addAttribute("users",userService.getAllUsers());
 
-        return "redirect:/user/create-user";
+        return "/administration/user/update-user";
+    }
+
+    @PostMapping("/update-user/{id}")
+    public String updateUser(@PathVariable("id") Long id, UserDTO userDTO, Model model){
+        userService.updateUser(id,userDTO);
+        model.addAttribute("user", new UserDTO());
+        model.addAttribute("roles",roleService.getAllRoles());
+        model.addAttribute("users",userService.getAllUsers());
+
+        return "/administration/user/update-user";
     }
 
 
