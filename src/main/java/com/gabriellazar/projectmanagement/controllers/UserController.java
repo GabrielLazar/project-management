@@ -3,6 +3,8 @@ package com.gabriellazar.projectmanagement.controllers;
 
 import com.gabriellazar.projectmanagement.dto.UserDTO;
 import java.util.*;
+import java.util.stream.Collectors;
+
 import com.gabriellazar.projectmanagement.mapper.MapperUtil;
 import com.gabriellazar.projectmanagement.services.RoleService;
 import com.gabriellazar.projectmanagement.services.UserService;

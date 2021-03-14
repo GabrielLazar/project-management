@@ -67,6 +67,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public Page<UserDTO> findPageableUser(int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo-1,pageSize);
-        return userRepository.findAll(pageable).map( user -> mapperUtil.convertToDTO(user,new UserDTO()));
+        return userRepository.findAllByOrderByIdDesc(pageable).map( user -> mapperUtil.convertToDTO(user,new UserDTO()));
     }
 }
