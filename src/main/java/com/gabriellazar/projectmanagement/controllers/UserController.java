@@ -68,11 +68,17 @@ public class UserController {
 
     @GetMapping("/update-user/{id}")
     public String editUser(@PathVariable("id") Long id, Model model){
+        Page<UserDTO> page = userService.findPageableUser(1,Integer.valueOf(pageSize));
+        List<UserDTO> users = page.getContent();
+
+        model.addAttribute("currentPage",1);
+        model.addAttribute("totalNumberOfPages",page.getTotalPages());
+
         UserDTO userDTO = userService.findUserById(id);
         userDTO.setPassword("");
         model.addAttribute("user",userDTO);
         model.addAttribute("roles",roleService.getAllRoles());
-        model.addAttribute("users",userService.getAllUsers());
+        model.addAttribute("users",users);
 
         return "/administration/user/update-user";
     }
@@ -80,11 +86,7 @@ public class UserController {
     @PostMapping("/update-user/{id}")
     public String updateUser(@PathVariable("id") Long id, UserDTO userDTO, Model model){
         userService.updateUser(id,userDTO);
-        model.addAttribute("user", new UserDTO());
-        model.addAttribute("roles",roleService.getAllRoles());
-        model.addAttribute("users",userService.getAllUsers());
-
-        return "/administration/user/update-user";
+        return "redirect:/user/create-user";
     }
 
 }

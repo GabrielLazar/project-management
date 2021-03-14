@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(UserDTO userDTO) {
-        userRepository.saveAndFlush(mapperUtil.convertToEntity(userDTO,new User()));
+        userRepository.save(mapperUtil.convertToEntity(userDTO,new User()));
     }
 
     @Override
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
        User user = userRepository.findById(id).get();
        User updatedUser = mapperUtil.convertToEntity(userDTO,new User());
        updatedUser.setId(user.getId());
-       userRepository.saveAndFlush(updatedUser);
+       userRepository.save(updatedUser);
        return findUserByName(updatedUser.getUserName());
     }
 
