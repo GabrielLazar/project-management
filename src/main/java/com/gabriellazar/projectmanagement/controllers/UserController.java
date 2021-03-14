@@ -2,11 +2,13 @@ package com.gabriellazar.projectmanagement.controllers;
 
 
 import com.gabriellazar.projectmanagement.dto.UserDTO;
-import com.gabriellazar.projectmanagement.entity.User;
+import java.util.*;
 import com.gabriellazar.projectmanagement.mapper.MapperUtil;
 import com.gabriellazar.projectmanagement.services.RoleService;
 import com.gabriellazar.projectmanagement.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,17 +21,28 @@ public class UserController {
     private RoleService roleService;
     private UserService userService;
 
+    @Value("${pageSize}")
+    private String pageSize;
+
     @Autowired
     public UserController(RoleService roleService, UserService userService) {
         this.roleService = roleService;
         this.userService = userService;
     }
 
-    @GetMapping("/create-user")
-    public String getCreateUser(Model model){
+    @GetMapping("/create-user{page}")
+    public String getCreateUser(@RequestParam(value = "page",required = false) Optional<Integer> pageNumber, Model model){
+        int currentPage = pageNumber.orElse(1);
+        int sizeOfPage = Integer.valueOf(pageSize);
+        Page<UserDTO> page = userService.findPageableUser(currentPage,sizeOfPage);
+        List<UserDTO> users = page.getContent();
+
+        model.addAttribute("currentPage",currentPage);
+        model.addAttribute("totalNumberOfPages",page.getTotalPages());
+
+        model.addAttribute("users", users);
         model.addAttribute("user",new UserDTO());
         model.addAttribute("roles",roleService.getAllRoles());
-        model.addAttribute("users",userService.getAllUsers());
         return "/administration/user/create-user";
     }
 
@@ -71,6 +84,5 @@ public class UserController {
 
         return "/administration/user/update-user";
     }
-
 
 }

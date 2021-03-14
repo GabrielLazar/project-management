@@ -204,12 +204,27 @@
                     </tr>
                     </tbody>
                 </table>
+                <p></p>
+                <div class="table-pagination" th:if="${totalNumberOfPages > 1}">
+                           <ul class="pagination justify-content-center">
+                               <li>
+                                   <span class="page-link" th:unless="${currentPage != 1}">Previous</span>
+                                   <a class="page-link" th:if="${currentPage != 1}"  th:href="@{/user/create-user(page=${currentPage}-1)}">Previous</a>
+                               </li>
+                               <li th:each="page : ${#numbers.sequence(1,totalNumberOfPages)}">
+                                   <span  class="page-link" th:unless="${currentPage != page}" th:text="${page}" style="color: #5969ff" ></span>
+                                   <a class="page-link" th:if="${currentPage != page}"  th:href="@{/user/create-user(page=${page})}" th:text="${page}"></a>
+                               </li>
+                               <li>
+                                   <span class="page-link" th:unless="${currentPage < totalNumberOfPages}">Next</span>
+                                   <a class="page-link" th:if="${currentPage < totalNumberOfPages}" th:href="@{/user/create-user(page=${currentPage}+1)}">Next</a>
+                               </li>
+                           </ul>
+                </div>
             </div>
         </div>
-                <!-- ============================================================== -->
-                <!-- end pageheader  -->
-                <!-- ============================================================== -->
             </div>
+
             <!-- ============================================================== -->
             <!-- end wrapper  -->
             <!-- ============================================================== -->

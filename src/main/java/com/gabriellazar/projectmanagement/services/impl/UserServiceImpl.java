@@ -6,6 +6,9 @@ import com.gabriellazar.projectmanagement.mapper.MapperUtil;
 import com.gabriellazar.projectmanagement.repository.UserRepository;
 import com.gabriellazar.projectmanagement.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -59,5 +62,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO findUserById(Long id) {
         return mapperUtil.convertToDTO(userRepository.findById(id).get(),new UserDTO());
+    }
+
+    @Override
+    public Page<UserDTO> findPageableUser(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize);
+        return userRepository.findAll(pageable).map( user -> mapperUtil.convertToDTO(user,new UserDTO()));
     }
 }
