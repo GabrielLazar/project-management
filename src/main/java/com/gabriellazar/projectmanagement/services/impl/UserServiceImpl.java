@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,7 +29,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDTO> getAllUsers() {
-        List<User> users = userRepository.findAll();
        return userRepository.findAll().stream()
                .map(user -> mapperUtil.convertToDTO(user,new UserDTO()))
                .sorted((u1,u2) -> u2.getId().compareTo(u1.getId()))
@@ -37,7 +37,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO findUserByName(String username) {
-        return mapperUtil.convertToDTO(userRepository.findByUserName(username).get(),new UserDTO());
+        Optional<User> user = userRepository.findByUserNameIgnoreCase(username);
+        return user.map(value -> mapperUtil.convertToDTO(value, new UserDTO())).orElse(null);
     }
 
     @Override

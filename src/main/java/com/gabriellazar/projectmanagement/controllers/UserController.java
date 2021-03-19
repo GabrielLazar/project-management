@@ -3,9 +3,6 @@ package com.gabriellazar.projectmanagement.controllers;
 
 import com.gabriellazar.projectmanagement.dto.UserDTO;
 import java.util.*;
-import java.util.stream.Collectors;
-
-import com.gabriellazar.projectmanagement.mapper.MapperUtil;
 import com.gabriellazar.projectmanagement.services.RoleService;
 import com.gabriellazar.projectmanagement.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +10,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 
 @Controller
@@ -45,18 +45,49 @@ public class UserController {
         model.addAttribute("users", users);
         model.addAttribute("user",new UserDTO());
         model.addAttribute("roles",roleService.getAllRoles());
+
         return "/administration/user/create-user";
     }
 
     @PostMapping("/create-user")
-    public String insertUser(UserDTO userDTO){
-//        boolean check = false;
-//        if(!userDTO.getPassword().equals(userDTO.getConfirmPassword())){
-//            check = true;
-//            model.addAttribute("check",check);
+    public String insertUser(@Valid UserDTO userDTO, BindingResult result,Model model){
+
+        UserDTO existingUser = userService.findUserByName(userDTO.getUserName());
+
+        if (existingUser != null) {
+            result.rejectValue("userName", null, "There is already an account registered with that username");
+        }
+
+        if (result.hasErrors()) {
+            Page<UserDTO> page = userService.findPageableUser(1,5);
+            List<UserDTO> users = page.getContent();
+
+            model.addAttribute("currentPage",1);
+            model.addAttribute("totalNumberOfPages",page.getTotalPages());
+
+            model.addAttribute("users", users);
+            model.addAttribute("user",new UserDTO());
+            model.addAttribute("roles",roleService.getAllRoles());
+
+            return "/administration/user/create-user";
+        }
+//        if(existingUser != null){
+//            Page<UserDTO> page = userService.findPageableUser(1,Integer.valueOf(pageSize));
+//            List<UserDTO> users = page.getContent();
+//
+//            model.addAttribute("currentPage",1);
+//            model.addAttribute("totalNumberOfPages",page.getTotalPages());
+//
+//            model.addAttribute("users", users);
+//            model.addAttribute("user",new UserDTO());
+//            model.addAttribute("roles",roleService.getAllRoles());
+//
+//            model.addAttribute("existingUser",existingUser);
+//
+//            return "/administration/user/create-user";
 //        }
 
-        userService.saveUser(userDTO);
+         userService.saveUser(userDTO);
         return "redirect:/user/create-user";
     }
 
@@ -84,7 +115,7 @@ public class UserController {
     }
 
     @PostMapping("/update-user/{id}")
-    public String updateUser(@PathVariable("id") Long id, UserDTO userDTO, Model model){
+    public String updateUser(@PathVariable("id") Long id, UserDTO userDTO){
         userService.updateUser(id,userDTO);
         return "redirect:/user/create-user";
     }
