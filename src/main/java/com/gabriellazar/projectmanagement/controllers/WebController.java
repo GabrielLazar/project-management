@@ -13,20 +13,6 @@ public class WebController {
 
 
 
-
-//    @RequestMapping(path = "/",method = RequestMethod.POST)
-//    public String verifyUsername(@ModelAttribute("user") UserDTO userDTO, Model model){
-//        String check = userDTO.getUserName().equals("Gabi") ? "Ga": null;
-//        if(check != null){
-//            check = "Invalid username or password.";
-//            model.addAttribute("check",check);
-//            return "index";
-//        }
-//        return "welcome";
-//    }
-
-
-
     @RequestMapping("/create-project")
     public String getProject(@ModelAttribute("user") UserDTO userDTO){
         return "/project/create-project";
