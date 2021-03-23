@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 
 
@@ -50,42 +49,22 @@ public class UserController {
     }
 
     @PostMapping("/create-user")
-    public String insertUser(@Valid UserDTO userDTO, BindingResult result,Model model){
+    public String insertUser(@ModelAttribute("user") @Valid UserDTO userDTO, BindingResult result,Model model){
 
         UserDTO existingUser = userService.findUserByName(userDTO.getUserName());
 
         if (existingUser != null) {
-            result.rejectValue("userName", null, "There is already an account registered with that username");
+            result.rejectValue("userName", null, "There is already an account registered with this username! Please choose a new username.");
         }
 
         if (result.hasErrors()) {
-            Page<UserDTO> page = userService.findPageableUser(1,5);
+            Page<UserDTO> page = userService.findPageableUser(1,Integer.valueOf(pageSize));
             List<UserDTO> users = page.getContent();
-
-            model.addAttribute("currentPage",1);
-            model.addAttribute("totalNumberOfPages",page.getTotalPages());
-
+            model.addAttribute("user",userDTO);
             model.addAttribute("users", users);
-            model.addAttribute("user",new UserDTO());
             model.addAttribute("roles",roleService.getAllRoles());
-
             return "/administration/user/create-user";
         }
-//        if(existingUser != null){
-//            Page<UserDTO> page = userService.findPageableUser(1,Integer.valueOf(pageSize));
-//            List<UserDTO> users = page.getContent();
-//
-//            model.addAttribute("currentPage",1);
-//            model.addAttribute("totalNumberOfPages",page.getTotalPages());
-//
-//            model.addAttribute("users", users);
-//            model.addAttribute("user",new UserDTO());
-//            model.addAttribute("roles",roleService.getAllRoles());
-//
-//            model.addAttribute("existingUser",existingUser);
-//
-//            return "/administration/user/create-user";
-//        }
 
          userService.saveUser(userDTO);
         return "redirect:/user/create-user";
