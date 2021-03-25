@@ -74,8 +74,10 @@
                                         <label for="username" class="col-form-label">Username</label>
                                         <input id="username" placeholder="Username" type="text" class="form-control" th:field="*{userName}" required>
                                         <div class="invalid-feedback">
-                                            Please enter user name.
+                                            Please enter username.
                                         </div>
+                                        <span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" style="  width: 100%;margin-top: 0.25rem;
+                                        font-size: 80%;color: #dc3545;"></span>
                                     </div>
                                 </div>
                                 <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
