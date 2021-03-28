@@ -94,7 +94,20 @@ public class UserController {
     }
 
     @PostMapping("/update-user/{id}")
-    public String updateUser(@PathVariable("id") Long id, UserDTO userDTO){
+    public String updateUser(@PathVariable("id") Long id, @ModelAttribute("user") @Valid UserDTO userDTO,BindingResult result,Model model){
+        boolean checkPasswordConfirmation = !userDTO.getPassword().equals(userDTO.getConfirmPassword());
+        if(checkPasswordConfirmation){
+            result.rejectValue("confirmPassword", null, "Confirm password must match the password!");
+        }
+        if(result.hasErrors()){
+            Page<UserDTO> page = userService.findPageableUser(1,Integer.valueOf(pageSize));
+            List<UserDTO> users = page.getContent();
+            model.addAttribute("user",userDTO);
+            model.addAttribute("roles",roleService.getAllRoles());
+            model.addAttribute("users",users);
+            return "/administration/user/update-user";
+        }
+
         userService.updateUser(id,userDTO);
         return "redirect:/user/create-user";
     }
