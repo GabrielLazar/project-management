@@ -74,10 +74,10 @@
                                         <label for="username" class="col-form-label">Username</label>
                                         <input id="username" placeholder="Username" type="text" class="form-control" th:field="*{userName}" required>
                                         <div class="invalid-feedback">
-                                            Please enter a valid username.
+                                            Please enter a username.
                                         </div>
-                                        <span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" style="  width: 100%;margin-top: 0.25rem;
-                                        font-size: 80%;color: #dc3545;"></span>
+                                        <span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" style="width: 100%;
+                                        margin-top: 0.25rem;font-size: 80%;color: #dc3545;"></span>
                                     </div>
                                 </div>
                                 <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
@@ -119,7 +119,7 @@
                                         <input id="password" placeholder="Password" type="text" class="form-control"
                                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" th:field="*{password}"  required>
                                         <div class="invalid-feedback">
-                                            Password ust contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.
+                                            Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.
                                         </div>
                                     </div>
                                 </div>
@@ -127,9 +127,9 @@
                                     <div class="form-group">
                                         <label for="confirm_password" class="col-form-label">Confirm Password</label>
                                         <input id="confirm_password" placeholder="Confirm your Password"  type="text" class="form-control"
-                                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}" th:field="*{confirmPassword}" required>
+                                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" th:field="*{confirmPassword}" required>
                                         <div class="invalid-feedback">
-                                            Must match the password.
+                                            Confirm password must match the password.
                                         </div>
                                     </div>
                                 </div>
@@ -140,7 +140,7 @@
                                         <label>Choose a role</label>
                                         <select th:field="*{role}" class="custom-select" required="required">
                                             <option th:each="user_role : ${roles}" th:value="${user_role.id}" th:text="${user_role.description}"
-                                                    th:selected="(${user_role.id} == *{id})">></option>
+                                                    >></option>
                                         </select>
                                     </div>
                                 </div>
@@ -198,7 +198,6 @@
                                th:data-confirm-delete="|Are you sure you want to delete user: ${user.userName}?|"
                                onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false"
                             >
-
                                 <button type="button" class="btn btn-secondary btn-sm" th:text="Delete">
                                 </button>
                             </a>

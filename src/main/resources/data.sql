@@ -22,7 +22,7 @@ VALUES ('2021-01-01 00:00:00',1,'2021-01-01 00:00:00',1,
 'Vlad','Popesco','vpopesco','v.popesco@projectmanagement.com','1988-01-23','5213110230','MALE',true,1);
 INSERT INTO users(insert_date_time, insert_user_id,  last_update_date_time, last_update_user_id,first_name,last_name,user_name,email,birth_date,phone_number,gender,enabled,role_id)
 VALUES ('2021-01-01 00:00:00',1,'2021-01-01 00:00:00',1,
-'Adrian','Craciunescu','acraciunescu','a.craciunescu@projectmanagement.com','1990-05-20','7445698213','MALE',true,1);
+'Adrian','Noel','anoel','a.noel@projectmanagement.com','1990-05-20','7445698213','MALE',true,1);
 INSERT INTO users(insert_date_time, insert_user_id,  last_update_date_time, last_update_user_id,first_name,last_name,user_name,email,birth_date,phone_number,gender,enabled,role_id)
 VALUES ('2021-01-01 00:00:00',1,'2021-01-01 00:00:00',1,
 'Diego','Pizarro','dpizarro','d.pizarro@projectmanagement.com','2000-01-01','8975541233','MALE',true,2);
@@ -31,7 +31,7 @@ VALUES ('2021-01-01 00:00:00',1,'2021-01-01 00:00:00',1,
 'Said','Aly','saly','s.aly@projectmanagement.com','1977-05-04','2415678892','MALE',true,3);
 INSERT INTO users(insert_date_time, insert_user_id,  last_update_date_time, last_update_user_id,first_name,last_name,user_name,email,birth_date,phone_number,gender,enabled,role_id)
 VALUES ('2021-01-01 00:00:00',1,'2021-01-01 00:00:00',1,
-'Rema','Maglione','rmaglione','r.maglione@projectmanagement.com','1983-08-12','2341577890','FEMALE',true,3);
+'Madalina','Maglione','mmaglione','m.maglione@projectmanagement.com','1983-08-12','2341577890','FEMALE',true,3);
 INSERT INTO users(insert_date_time, insert_user_id,  last_update_date_time, last_update_user_id,first_name,last_name,user_name,email,birth_date,phone_number,gender,enabled,role_id)
 VALUES ('2021-01-01 00:00:00',1,'2021-01-01 00:00:00',1,
 'Sebastian','Brown','sbrown','s.brown@projectmanagement.com','1978-09-25','2567801234','MALE',true,3);
