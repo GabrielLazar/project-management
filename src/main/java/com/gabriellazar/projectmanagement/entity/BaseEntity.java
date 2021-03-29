@@ -25,6 +25,8 @@ public class BaseEntity {
     public void prePersist(){
         this.insertDateTime = LocalDateTime.now();
         this.insertUserId = 1L;
+        this.lastUpdateDateTime = LocalDateTime.now();
+        this.lastUpdateUserId = 1L;
     }
 
     @PreUpdate
