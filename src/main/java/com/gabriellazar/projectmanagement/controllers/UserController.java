@@ -16,7 +16,7 @@ import javax.validation.Valid;
 
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/administration")
 public class UserController {
 
     private RoleService roleService;
@@ -67,13 +67,13 @@ public class UserController {
         }
 
          userService.saveUser(userDTO);
-        return "redirect:/user/create-user";
+        return "redirect:/administration/create-user";
     }
 
     @GetMapping("/delete-user/{id}")
     public String deleteUser(@PathVariable("id") Long id){
         userService.deleteUserById(id);
-        return "redirect:/user/create-user";
+        return "redirect:/administration/create-user";
     }
 
     @GetMapping("/update-user/{id}")
@@ -109,7 +109,7 @@ public class UserController {
         }
 
         userService.updateUser(id,userDTO);
-        return "redirect:/user/create-user";
+        return "redirect:/administration/create-user";
     }
 
 }

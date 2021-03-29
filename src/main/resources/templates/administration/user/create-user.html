@@ -47,7 +47,7 @@
                 <!-- ============================================================== -->
                 <div class="row" >
                     <div class="col-lg-12 col-md-12 col-sm-12" >
-                        <form  class="needs-validation" th:object="${user}" method="post" th:action="@{/user/create-user}" novalidate>
+                        <form  class="needs-validation" th:object="${user}" method="post" th:action="@{/administration/create-user}" novalidate>
                             <div class="row">
                                 <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
                                     <div class="form-group">
@@ -193,8 +193,8 @@
                         <td th:text="${user.phoneNumber}"></td>
                         <td th:text="${user.role.description}"></td>
                         <td class="actions">
-                            <a th:href="@{/user/update-user/{id}(id=${user.id})}"><button type="button" class="btn btn-warning btn-sm" th:text="Update"></button></a>
-                            <a th:href="@{/user/delete-user/{id}(id=${user.id})}"
+                            <a th:href="@{/administration/update-user/{id}(id=${user.id})}"><button type="button" class="btn btn-warning btn-sm" th:text="Update"></button></a>
+                            <a th:href="@{/administration/delete-user/{id}(id=${user.id})}"
                                th:data-confirm-delete="|Are you sure you want to delete user: ${user.userName}?|"
                                onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false"
                             >
@@ -210,15 +210,15 @@
                            <ul class="pagination justify-content-center">
                                <li>
                                    <span class="page-link" th:unless="${currentPage != 1}">Previous</span>
-                                   <a class="page-link" th:if="${currentPage != 1}"  th:href="@{/user/create-user(page=${currentPage}-1)}">Previous</a>
+                                   <a class="page-link" th:if="${currentPage != 1}"  th:href="@{/administration/create-user(page=${currentPage}-1)}">Previous</a>
                                </li>
                                <li th:each="page : ${#numbers.sequence(1,totalNumberOfPages)}">
                                    <span  class="page-link" th:unless="${currentPage != page}" th:text="${page}" style="color: #5969ff" ></span>
-                                   <a class="page-link" th:if="${currentPage != page}"  th:href="@{/user/create-user(page=${page})}" th:text="${page}"></a>
+                                   <a class="page-link" th:if="${currentPage != page}"  th:href="@{/administration/create-user(page=${page})}" th:text="${page}"></a>
                                </li>
                                <li>
                                    <span class="page-link" th:unless="${currentPage < totalNumberOfPages}">Next</span>
-                                   <a class="page-link" th:if="${currentPage < totalNumberOfPages}" th:href="@{/user/create-user(page=${currentPage}+1)}">Next</a>
+                                   <a class="page-link" th:if="${currentPage < totalNumberOfPages}" th:href="@{/administration/create-user(page=${currentPage}+1)}">Next</a>
                                </li>
                            </ul>
                 </div>

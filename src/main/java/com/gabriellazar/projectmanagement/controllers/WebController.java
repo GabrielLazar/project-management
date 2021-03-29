@@ -2,21 +2,13 @@ package com.gabriellazar.projectmanagement.controllers;
 
 import com.gabriellazar.projectmanagement.dto.UserDTO;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
 
 @Controller
 public class WebController {
 
-
-
-
-    @RequestMapping("/create-project")
-    public String getProject(@ModelAttribute("user") UserDTO userDTO){
-        return "/project/create-project";
-    }
 
 
     @RequestMapping("/project-status")
