@@ -24,4 +24,8 @@ public class Project  extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private Status projectStatus;
     private String projectDetail;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
