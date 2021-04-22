@@ -34,7 +34,7 @@ public class UserController {
     @GetMapping("/create-user{page}")
     public String getCreateUser(@RequestParam(value = "page",required = false) Optional<Integer> pageNumber, Model model){
         int currentPage = pageNumber.orElse(1);
-        int sizeOfPage = Integer.valueOf(pageSize);
+        int sizeOfPage = Integer.valueOf(this.pageSize);
         Page<UserDTO> page = userService.findPageableUser(currentPage,sizeOfPage);
         List<UserDTO> users = page.getContent();
 

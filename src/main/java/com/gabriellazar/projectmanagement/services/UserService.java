@@ -1,7 +1,6 @@
 package com.gabriellazar.projectmanagement.services;
 
 import com.gabriellazar.projectmanagement.dto.UserDTO;
-import com.gabriellazar.projectmanagement.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
