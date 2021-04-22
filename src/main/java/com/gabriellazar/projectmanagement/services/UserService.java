@@ -9,13 +9,14 @@ import java.util.*;
 @Service
 public interface UserService {
 
-    List<UserDTO> getAllUsers();
+    List<UserDTO> findAllUsers();
     UserDTO findUserById(Long id);
     UserDTO findUserByName(String username);
     void saveUser(UserDTO userDTO);
     UserDTO updateUser(Long id,UserDTO userDTO);
     void deleteUserById(Long id);
     Page<UserDTO> findPageableUser(int pageNo, int pageSize);
+    List<UserDTO> findAllUsersByRole(String roleDescription);
 
 
 }

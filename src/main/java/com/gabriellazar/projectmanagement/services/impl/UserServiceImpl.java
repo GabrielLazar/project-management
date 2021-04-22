@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDTO> getAllUsers() {
+    public List<UserDTO> findAllUsers() {
        return userRepository.findAll().stream()
                .map(user -> mapperUtil.convertToDTO(user,new UserDTO()))
                .sorted((u1,u2) -> u2.getId().compareTo(u1.getId()))
@@ -69,5 +69,12 @@ public class UserServiceImpl implements UserService {
     public Page<UserDTO> findPageableUser(int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo-1,pageSize);
         return userRepository.findAllByOrderByLastUpdateDateTimeDesc(pageable).map( user -> mapperUtil.convertToDTO(user,new UserDTO()));
+    }
+
+    @Override
+    public List<UserDTO> findAllUsersByRole(String roleDescription) {
+        return this.findAllUsers().stream()
+                .filter( u -> u.getRole().getDescription().equals(roleDescription))
+                .collect(Collectors.toList());
     }
 }
