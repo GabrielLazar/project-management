@@ -2,6 +2,7 @@ package com.gabriellazar.projectmanagement.controllers;
 
 
 import com.gabriellazar.projectmanagement.dto.ProjectDTO;
+import com.gabriellazar.projectmanagement.dto.UserDTO;
 import com.gabriellazar.projectmanagement.services.ProjectService;
 import com.gabriellazar.projectmanagement.services.UserService;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,7 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -39,8 +39,13 @@ public class ProjectController {
         Page<ProjectDTO> page = projectService.findAllPageableProjects(currentPage,pageSize);
         List<ProjectDTO> projectDTOS = page.getContent();
 
+        List<UserDTO> managers = userService.findAllUsersByRole("Manager");
         model.addAttribute("currentPage",currentPage);
         model.addAttribute("totalNumberOfPages",page.getTotalPages());
+
+        model.addAttribute("projects",projectDTOS);
+        model.addAttribute("managers",managers);
+        model.addAttribute("project", new ProjectDTO());
 
         return "/administration/project/create-project";
     }

@@ -47,12 +47,12 @@
                 <!-- ============================================================== -->
                 <div class="row" >
                     <div class="col-lg-12 col-md-12 col-sm-12" >
-                        <form novalidate>
+                        <form class="needs-validation" th:object="${project}" method="post" th:action="@{/administration/create-project}" novalidate>
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
                                         <label class="col-form-label">Project Name</label>
-                                        <input id="projectname" type="text" placeholder="Project Name" class="form-control" required>
+                                        <input id="projectname" type="text" placeholder="Project Name" class="form-control" th:field="*{projectName}" required>
                                         <div class="invalid-feedback">Please enter project name.</div>
                                     </div>
                                 </div>
@@ -61,7 +61,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label class="col-form-label">Project Code</label>
-                                        <input id="projectcode" type="text" placeholder="Project Code" class="form-control" required>
+                                        <input id="projectcode" type="text" placeholder="Project Code" class="form-control" th:field="*{projectCode}" required>
                                         <div class="invalid-feedback">Please enter project code.</div>
                                     </div>
                                 </div>
@@ -70,8 +70,8 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label>Assigned Manager</label>
-                                        <select  class="custom-select" required="required">
-                                            <option>Select</option>
+                                        <select  th:field="*{assignedManager}" class="custom-select" required="required">
+                                            <option th:each="manager : ${managers}" th:value="${manager.id}" th:text="${manager.firstName}">Select</option>
                                         </select>
                                         <div class="invalid-feedback">Please choose manager</div>
                                     </div>
@@ -81,7 +81,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label>Project Start Date</label>
-                                        <input type="date"  class="form-control">
+                                        <input th:field="*{projectDetail}" type="date"  class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label>Project Detail</label>
-                                        <textarea class="form-control" required></textarea>
+                                        <textarea th:field="projectDetail" class="form-control" required></textarea>
                                     </div>
                                 </div>
                             </div>
