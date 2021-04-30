@@ -38,4 +38,10 @@ VALUES ('2021-01-01 00:00:00',1,'2021-01-01 00:00:00',1,
 INSERT INTO users(insert_date_time, insert_user_id,  last_update_date_time, last_update_user_id,first_name,last_name,user_name,email,birth_date,phone_number,gender,enabled,role_id)
 VALUES ('2021-01-01 00:00:00',1,'2021-01-01 00:00:00',1,
 'Claudia','Schultz','cschultz','c.schultz@projectmanagement.com','1983-12-29','4545678912','FEMALE',true,3);
-
+--PROJECTS
+INSERT INTO projects(insert_date_time, insert_user_id,  last_update_date_time, last_update_user_id,project_name,project_code,start_date,project_detail,project_status,user_id)
+VALUES ('2021-01-01 00:00:00',1,'2021-01-01 00:00:00',1,
+'Random Password Generator','RPG','2021-01-01','A random password generator is a software program that automatically generates a password using parameters that a user sets.','OPEN',2);
+INSERT INTO projects(insert_date_time, insert_user_id,  last_update_date_time, last_update_user_id,project_name,project_code,start_date,project_detail,project_status,user_id)
+VALUES ('2021-01-01 00:00:00',1,'2021-01-01 00:00:00',1,
+'Nutrition/Fitness Tracker','NFT','2021-01-01','A fitness tracker can help an individual in self-monitoring their activities. It helps in setting fitness goals such as meeting a basic regular exercise activity goal, burning a specific number of calories in the day.','OPEN',3);
