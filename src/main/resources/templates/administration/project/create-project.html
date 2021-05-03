@@ -70,8 +70,8 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label>Assigned Manager</label>
-                                        <select  th:field="*{assignedManager}" class="custom-select" required="required">
-                                            <option th:each="manager : ${managers}" th:value="${manager.id}" th:text="${manager.firstName}">Select</option>
+                                        <select  th:field="*{user}" class="custom-select" required="required">
+                                            <option th:each="manager : ${managers}" th:value="${manager.id}" th:text="${manager.firstName + ' ' + manager.lastName}">Select</option>
                                         </select>
                                         <div class="invalid-feedback">Please choose manager</div>
                                     </div>
@@ -89,7 +89,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label>Project Detail</label>
-                                        <textarea th:field="projectDetail" class="form-control" required></textarea>
+                                        <textarea th:field="*{projectDetail}" class="form-control" required></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -126,13 +126,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Project 1</td>
-                        <td>Java with Thymeleaf</td>
-                        <td>01/01/2021</td>
-                        <td>Gabriel</td>
-                        <td>In progress</td>
-                        <td>
+                    <tr th:each="project : ${projects}">
+                        <td th:text="${project.projectCode}"></td>
+                        <td th:text="${project.projectName}"></td>
+                        <td th:text="${project.startDate}"></td>
+                        <td th:text="${project.user.firstName + ' ' + project.user.lastName}"></td>
+                        <td th:text="${project.projectStatus}"></td>
+                        <td class="actions">
                             <a class="btn btn-warning rounded-0">Update</a>
                             <a><button type="button" class="btn btn-danger rounded-0">Delete</button></a>
                             <a class="btn btn-info rounded-0">Complete</a>

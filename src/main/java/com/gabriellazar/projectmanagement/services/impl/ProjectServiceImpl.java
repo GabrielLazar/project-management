@@ -25,7 +25,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Page<ProjectDTO> findAllPageableProjects(int pageNo, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNo,pageSize);
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize);
         return projectRepository.findAllByOrderByLastUpdateDateTimeDesc(pageable)
                 .map(project -> mapperUtil.convertToDTO(project,new ProjectDTO()));
     }

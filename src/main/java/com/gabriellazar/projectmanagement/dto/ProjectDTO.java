@@ -16,7 +16,7 @@ public class ProjectDTO {
     private Long id;
     private String projectName;
     private String projectCode;
-    private UserDTO assignedManager;
+    private UserDTO user;
     private String projectDetail;
     private Status projectStatus;
 

@@ -51,7 +51,7 @@ public class UserController {
     @PostMapping("/create-user")
     public String insertUser(@ModelAttribute("user") @Valid UserDTO userDTO, BindingResult result,Model model){
 
-        UserDTO existingUser = userService.findUserByName(userDTO.getUserName());
+        UserDTO existingUser = userService.findUserByUsername(userDTO.getUserName());
 
         if (existingUser != null) {
             result.rejectValue("userName", null, "There is already an account registered with this username! Please choose a new username.");

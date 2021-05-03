@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO findUserByName(String username) {
+    public UserDTO findUserByUsername(String username) {
         Optional<User> user = userRepository.findByUserNameIgnoreCase(username);
         return user.map(value -> mapperUtil.convertToDTO(value, new UserDTO())).orElse(null);
     }
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
        User updatedUser = mapperUtil.convertToEntity(userDTO,new User());
        updatedUser.setId(user.getId());
        userRepository.save(updatedUser);
-       return findUserByName(updatedUser.getUserName());
+       return findUserByUsername(updatedUser.getUserName());
     }
 
     @Override

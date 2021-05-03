@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Data
 @Entity
 @Table(name = "projects")
-public class Project  extends BaseEntity{
+public class Project  extends BaseEntity {
 
     private String projectName;
     private String projectCode;
