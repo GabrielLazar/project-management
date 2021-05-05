@@ -45,3 +45,12 @@ VALUES ('2021-01-01 00:00:00',1,'2021-01-01 00:00:00',1,
 INSERT INTO projects(insert_date_time, insert_user_id,  last_update_date_time, last_update_user_id,project_name,project_code,start_date,project_detail,project_status,user_id)
 VALUES ('2021-01-01 00:00:00',1,'2021-01-01 00:00:00',1,
 'Nutrition/Fitness Tracker','NFT','2021-01-01','A fitness tracker can help an individual in self-monitoring their activities. It helps in setting fitness goals such as meeting a basic regular exercise activity goal, burning a specific number of calories in the day.','OPEN',3);
+INSERT INTO projects(insert_date_time, insert_user_id,  last_update_date_time, last_update_user_id,project_name,project_code,start_date,project_detail,project_status,user_id)
+VALUES ('2021-01-01 00:00:00',1,'2021-01-01 00:00:00',1,
+'Mad Libs Creator','MLC','2021-01-01','Mad Libs is a phrasal template word game which consists of one player prompting others for a list of words to substitute for blanks in a story before reading aloud.','OPEN',2);
+INSERT INTO projects(insert_date_time, insert_user_id,  last_update_date_time, last_update_user_id,project_name,project_code,start_date,project_detail,project_status,user_id)
+VALUES ('2021-01-01 00:00:00',1,'2021-01-01 00:00:00',1,
+'Image Caption Generator','ICG','2021-01-01','Image caption generator is a task that involves computer vision and natural language processing concepts to recognize the context of an image and describe them in a natural language like English.','OPEN',3);
+INSERT INTO projects(insert_date_time, insert_user_id,  last_update_date_time, last_update_user_id,project_name,project_code,start_date,project_detail,project_status,user_id)
+VALUES ('2021-01-01 00:00:00',1,'2021-01-01 00:00:00',1,
+'Sports Scores Tracker','SST','2021-01-01','Application that tracks the sport results.','OPEN',2);
