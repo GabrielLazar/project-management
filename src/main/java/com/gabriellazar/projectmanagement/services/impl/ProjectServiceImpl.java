@@ -38,4 +38,9 @@ public class ProjectServiceImpl implements ProjectService {
         Optional<Project> project = projectRepository.findByProjectCodeIgnoreCase(projectCode);
         return project.map(proj -> mapperUtil.convertToDTO(proj,new ProjectDTO())).orElse(null);
     }
+
+    @Override
+    public void saveProject(ProjectDTO projectDTO) {
+        projectRepository.saveAndFlush(mapperUtil.convertToEntity(projectDTO, new Project()));
+    }
 }
