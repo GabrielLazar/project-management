@@ -6,6 +6,7 @@ import com.gabriellazar.projectmanagement.mapper.MapperUtil;
 import com.gabriellazar.projectmanagement.repository.UserRepository;
 import com.gabriellazar.projectmanagement.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -21,8 +22,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     private MapperUtil mapperUtil;
 
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository, MapperUtil mapperUtil) {
+    public UserServiceImpl(@Lazy UserRepository userRepository, MapperUtil mapperUtil) {
         this.userRepository = userRepository;
         this.mapperUtil = mapperUtil;
     }
