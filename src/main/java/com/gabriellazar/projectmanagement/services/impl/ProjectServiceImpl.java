@@ -2,6 +2,7 @@ package com.gabriellazar.projectmanagement.services.impl;
 
 import com.gabriellazar.projectmanagement.dto.ProjectDTO;
 import com.gabriellazar.projectmanagement.entity.Project;
+import com.gabriellazar.projectmanagement.enums.Status;
 import com.gabriellazar.projectmanagement.mapper.MapperUtil;
 import com.gabriellazar.projectmanagement.repository.ProjectRepository;
 import com.gabriellazar.projectmanagement.services.ProjectService;
@@ -41,6 +42,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void saveProject(ProjectDTO projectDTO) {
+        projectDTO.setProjectStatus(Status.OPEN);
         projectRepository.saveAndFlush(mapperUtil.convertToEntity(projectDTO, new Project()));
     }
 }
