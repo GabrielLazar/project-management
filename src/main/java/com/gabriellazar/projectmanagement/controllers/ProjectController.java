@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,5 +48,28 @@ public class ProjectController {
         model.addAttribute("project", new ProjectDTO());
 
         return "/administration/project/create-project";
+    }
+
+    @PostMapping("/create-project")
+    public String insertProject(@ModelAttribute("project") @Valid ProjectDTO projectDTO, BindingResult result, Model model){
+
+        ProjectDTO existingProject = projectService.findProjectByProjectCode(projectDTO.getProjectCode());
+
+        if (existingProject != null) {
+            result.rejectValue("projectCode", null, "There is already an project registered with this code! Please choose a new code.");
+        }
+
+        if (result.hasErrors()) {
+            Page<ProjectDTO> page = projectService.findAllPageableProjects(1,Integer.valueOf(this.pageSize));
+            List<ProjectDTO> projectDTOS = page.getContent();
+            List<UserDTO> managers = userService.findAllUsersByRole("Manager");
+            model.addAttribute("project",projectDTO);
+            model.addAttribute("projects",projectDTOS);
+            model.addAttribute("managers",managers);
+            return "/administration/project/create-project";
+        }
+
+        projectService.saveProject(projectDTO);
+        return "redirect:/administration/create-project";
     }
 }
