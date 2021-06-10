@@ -2,7 +2,7 @@ package com.gabriellazar.projectmanagement.enums;
 
 public enum Status {
 
-    OPEN("Open"),IN_PROGRESS("In Progress"),IN_TEST("In Testing"),COMPLETE("Completed");
+    OPEN("Open"),IN_PROGRESS("In Progress"),IN_UAT("UAT Testing"),COMPLETE("Completed");
 
     private final String value;
 
