@@ -45,4 +45,9 @@ public class ProjectServiceImpl implements ProjectService {
         projectDTO.setProjectStatus(Status.OPEN);
         projectRepository.saveAndFlush(mapperUtil.convertToEntity(projectDTO, new Project()));
     }
+
+    @Override
+    public void deleteProject(Long id) {
+        projectRepository.deleteById(id);
+    }
 }

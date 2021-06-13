@@ -13,4 +13,5 @@ public interface ProjectService {
     Page<ProjectDTO> findAllPageableProjects(int pageNo, int pageSize);
     ProjectDTO findProjectByProjectCode(String projectCode);
     void saveProject(ProjectDTO projectDTO);
+    void deleteProject(Long id);
 }
