@@ -7,6 +7,7 @@ import com.gabriellazar.projectmanagement.mapper.MapperUtil;
 import com.gabriellazar.projectmanagement.repository.ProjectRepository;
 import com.gabriellazar.projectmanagement.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +23,7 @@ public class ProjectServiceImpl implements ProjectService {
     private MapperUtil mapperUtil;
 
     @Autowired
-    public ProjectServiceImpl(ProjectRepository projectRepository, MapperUtil mapperUtil) {
+    public ProjectServiceImpl(@Lazy ProjectRepository projectRepository, MapperUtil mapperUtil) {
         this.projectRepository = projectRepository;
         this.mapperUtil = mapperUtil;
     }
@@ -49,5 +50,10 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void deleteProject(Long id) {
         projectRepository.deleteById(id);
+    }
+
+    @Override
+    public ProjectDTO findProjectById(Long id) {
+        return mapperUtil.convertToDTO(projectRepository.findById(id).get(),new ProjectDTO());
     }
 }

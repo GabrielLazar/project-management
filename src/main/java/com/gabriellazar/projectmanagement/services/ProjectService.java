@@ -14,4 +14,5 @@ public interface ProjectService {
     ProjectDTO findProjectByProjectCode(String projectCode);
     void saveProject(ProjectDTO projectDTO);
     void deleteProject(Long id);
+    ProjectDTO findProjectById(Long id);
 }
