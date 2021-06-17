@@ -72,4 +72,28 @@ public class ProjectController {
         projectService.saveProject(projectDTO);
         return "redirect:/administration/create-project";
     }
+
+    @GetMapping("/delete-project/{id}")
+    public String deleteProject(@PathVariable(value = "id") Long id){
+        projectService.deleteProject(id);
+        return "redirect:/administration/create-project";
+    }
+
+    @GetMapping("/update-project/{id}")
+    public String updateProject(@PathVariable("id") Long id,Model model){
+        Page<ProjectDTO> pages = projectService.findAllPageableProjects(1,Integer.valueOf(pageSize));
+        List<ProjectDTO> projectDTOS = pages.getContent();
+
+        model.addAttribute("currentPage",1);
+        model.addAttribute("totalNumberOfPages",pages.getTotalPages());
+
+        ProjectDTO projectDTO = projectService.findProjectById(id);
+        List<UserDTO> managers = userService.findAllUsersByRole("Manager");
+
+        model.addAttribute("project",projectDTO);
+        model.addAttribute("managers",managers);
+        model.addAttribute("projects",projectDTOS);
+
+        return "/administration/project/update-project";
+    }
 }
