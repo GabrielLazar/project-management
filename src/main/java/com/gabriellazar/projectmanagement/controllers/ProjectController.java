@@ -3,6 +3,7 @@ package com.gabriellazar.projectmanagement.controllers;
 
 import com.gabriellazar.projectmanagement.dto.ProjectDTO;
 import com.gabriellazar.projectmanagement.dto.UserDTO;
+import com.gabriellazar.projectmanagement.enums.Status;
 import com.gabriellazar.projectmanagement.services.ProjectService;
 import com.gabriellazar.projectmanagement.services.UserService;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -89,7 +91,9 @@ public class ProjectController {
 
         ProjectDTO projectDTO = projectService.findProjectById(id);
         List<UserDTO> managers = userService.findAllUsersByRole("Manager");
+        List<Status> statuses = Arrays.asList(Status.values());
 
+        model.addAttribute("statuses",statuses);
         model.addAttribute("project",projectDTO);
         model.addAttribute("managers",managers);
         model.addAttribute("projects",projectDTOS);

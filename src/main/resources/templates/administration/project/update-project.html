@@ -83,6 +83,21 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
+                                        <label>Assigned Status</label>
+                                        <select  name="status" class="custom-select" required="required">
+                                            <option th:each="status : ${statuses}"
+                                                    th:value="${status.value}"
+                                                    th:text="${status.value}"
+                                                    th:selected="(${status.value} == *{projectStatus.value})">
+                                            </option>
+                                        </select>
+                                        <div class="invalid-feedback">Please choose status</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
                                         <label>Project Start Date</label>
                                         <input th:field="*{startDate}" type="date"  class="form-control" required>
                                         <div class="invalid-feedback">Please choose start date</div>
