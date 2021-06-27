@@ -82,7 +82,7 @@ public class ProjectController {
     }
 
     @GetMapping("/update-project/{id}")
-    public String updateProject(@PathVariable("id") Long id,Model model){
+    public String getUpdateProject(@PathVariable("id") Long id,Model model){
         Page<ProjectDTO> pages = projectService.findAllPageableProjects(1,Integer.valueOf(pageSize));
         List<ProjectDTO> projectDTOS = pages.getContent();
 
@@ -100,4 +100,12 @@ public class ProjectController {
 
         return "/administration/project/update-project";
     }
+
+    @PostMapping("/update-project/{id}")
+    public String updateProject(@PathVariable("id") Long id,@ModelAttribute("project") @Valid ProjectDTO projectDTO){
+        ProjectDTO a = projectDTO;
+        projectService.updateProject(id,projectDTO);
+        return "redirect:/administration/create-project";
+    }
+
 }

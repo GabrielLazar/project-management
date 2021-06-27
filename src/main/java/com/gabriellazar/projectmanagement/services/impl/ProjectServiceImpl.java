@@ -1,11 +1,13 @@
 package com.gabriellazar.projectmanagement.services.impl;
 
+import ch.qos.logback.core.joran.util.beans.BeanUtil;
 import com.gabriellazar.projectmanagement.dto.ProjectDTO;
 import com.gabriellazar.projectmanagement.entity.Project;
 import com.gabriellazar.projectmanagement.enums.Status;
 import com.gabriellazar.projectmanagement.mapper.MapperUtil;
 import com.gabriellazar.projectmanagement.repository.ProjectRepository;
 import com.gabriellazar.projectmanagement.services.ProjectService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
@@ -55,5 +57,17 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public ProjectDTO findProjectById(Long id) {
         return mapperUtil.convertToDTO(projectRepository.findById(id).get(),new ProjectDTO());
+    }
+
+    @Override
+    public ProjectDTO updateProject(Long id, ProjectDTO projectDTO) {
+        Project existingProject = projectRepository.findById(id).get();
+        Project currentProject = mapperUtil.convertToEntity(projectDTO, new Project());
+        currentProject.setId(id);
+        currentProject.setInsertDateTime(existingProject.getInsertDateTime());
+        currentProject.setInsertUserId(existingProject.getInsertUserId());
+        currentProject.setProjectStatus(existingProject.getProjectStatus());
+        projectRepository.saveAndFlush(currentProject);
+        return findProjectById(id);
     }
 }

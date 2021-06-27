@@ -15,4 +15,5 @@ public interface ProjectService {
     void saveProject(ProjectDTO projectDTO);
     void deleteProject(Long id);
     ProjectDTO findProjectById(Long id);
+    ProjectDTO updateProject(Long id, ProjectDTO projectDTO);
 }
