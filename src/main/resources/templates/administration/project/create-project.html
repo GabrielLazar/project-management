@@ -140,7 +140,7 @@
                         <td class="actions">
                             <a th:href="@{/administration/update-project/{id}(id=${project.id})}" class="btn btn-warning rounded-0">Update</a>
                             <a th:href="@{/administration/delete-project/{id}(id=${project.id})}"><button type="button" class="btn btn-danger rounded-0" >Delete</button></a>
-                            <a class="btn btn-info rounded-0">Complete</a>
+                            <a th:href="@{/administration/complete-project/{id}(id=${project.id})}" class="btn btn-info rounded-0">Complete</a>
                         </td>
                     </tr>
                     </tbody>

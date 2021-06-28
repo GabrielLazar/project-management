@@ -66,8 +66,7 @@ public class ProjectServiceImpl implements ProjectService {
         currentProject.setId(id);
         currentProject.setInsertDateTime(existingProject.getInsertDateTime());
         currentProject.setInsertUserId(existingProject.getInsertUserId());
-        currentProject.setProjectStatus(existingProject.getProjectStatus());
-        projectRepository.saveAndFlush(currentProject);
+        projectRepository.save(currentProject);
         return findProjectById(id);
     }
 }

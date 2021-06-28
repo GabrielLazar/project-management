@@ -3,6 +3,7 @@ package com.gabriellazar.projectmanagement.controllers;
 
 import com.gabriellazar.projectmanagement.dto.ProjectDTO;
 import com.gabriellazar.projectmanagement.dto.UserDTO;
+import com.gabriellazar.projectmanagement.entity.Project;
 import com.gabriellazar.projectmanagement.enums.Status;
 import com.gabriellazar.projectmanagement.services.ProjectService;
 import com.gabriellazar.projectmanagement.services.UserService;
@@ -103,8 +104,15 @@ public class ProjectController {
 
     @PostMapping("/update-project/{id}")
     public String updateProject(@PathVariable("id") Long id,@ModelAttribute("project") @Valid ProjectDTO projectDTO){
-        ProjectDTO a = projectDTO;
         projectService.updateProject(id,projectDTO);
+        return "redirect:/administration/create-project";
+    }
+
+    @GetMapping("/complete-project/{id}")
+    public String completeProject(@PathVariable("id") Long id){
+        ProjectDTO existingProject = projectService.findProjectById(id);
+        existingProject.setProjectStatus(Status.COMPLETE);
+        projectService.updateProject(id,existingProject);
         return "redirect:/administration/create-project";
     }
 
