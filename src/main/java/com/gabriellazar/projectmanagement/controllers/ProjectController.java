@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -112,6 +113,7 @@ public class ProjectController {
     public String completeProject(@PathVariable("id") Long id){
         ProjectDTO existingProject = projectService.findProjectById(id);
         existingProject.setProjectStatus(Status.COMPLETE);
+        existingProject.setEndDate(LocalDate.now());
         projectService.updateProject(id,existingProject);
         return "redirect:/administration/create-project";
     }

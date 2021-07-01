@@ -22,4 +22,5 @@ public class ProjectDTO {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
+    private LocalDate endDate;
 }
