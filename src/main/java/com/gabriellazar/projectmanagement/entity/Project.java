@@ -4,6 +4,7 @@ import com.gabriellazar.projectmanagement.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @Data
 @Entity
 @Table(name = "projects")
+@ToString
 public class Project  extends BaseEntity {
 
     private String projectName;

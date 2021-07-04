@@ -4,6 +4,7 @@ import com.gabriellazar.projectmanagement.enums.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
+@ToString
 public class User extends BaseEntity {
 
     private String firstName;
