@@ -5,7 +5,6 @@ import com.gabriellazar.projectmanagement.entity.User;
 import com.gabriellazar.projectmanagement.mapper.MapperUtil;
 import com.gabriellazar.projectmanagement.repository.UserRepository;
 import com.gabriellazar.projectmanagement.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
