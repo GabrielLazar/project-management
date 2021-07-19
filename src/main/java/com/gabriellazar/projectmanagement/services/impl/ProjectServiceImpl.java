@@ -35,13 +35,13 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Page<ProjectDTO> findAllPageableProjects(int pageNo, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNo-1,pageSize);
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
         Page<ProjectDTO> pagesProjects = null;
-        try{
+        try {
             pagesProjects = projectRepository.findAllByOrderByLastUpdateDateTimeDesc(pageable)
-                            .map(project -> mapperUtil.convertToDTO(project,new ProjectDTO()));
-        } catch (Exception e){
-            log.error("Exception in getting all pageable Projects :: {}",e);
+                    .map(project -> mapperUtil.convertToDTO(project, new ProjectDTO()));
+        } catch (Exception e) {
+            log.error("Exception in getting all pageable Projects :: {}", e);
         }
         return pagesProjects;
     }
@@ -49,57 +49,57 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public ProjectDTO findProjectByProjectCode(String projectCode) {
         Optional<Project> project = projectRepository.findByProjectCodeIgnoreCase(projectCode);
-        return project.map(proj -> mapperUtil.convertToDTO(proj,new ProjectDTO())).orElse(null);
+        return project.map(proj -> mapperUtil.convertToDTO(proj, new ProjectDTO())).orElse(null);
     }
 
     @Override
     public void saveProject(ProjectDTO projectDTO) {
-        log.info("Starting to save project :: {}",projectDTO);
-        try{
-                projectDTO.setProjectStatus(Status.OPEN);
-                projectRepository.saveAndFlush(mapperUtil.convertToEntity(projectDTO, new Project()));
-        } catch (Exception e){
+        log.info("Starting to save project :: {}", projectDTO);
+        try {
+            projectDTO.setProjectStatus(Status.OPEN);
+            projectRepository.saveAndFlush(mapperUtil.convertToEntity(projectDTO, new Project()));
+        } catch (Exception e) {
             log.error("Exception in saving project :: {}", projectDTO);
             log.error("Exception saving project :: {}", e);
         }
-        log.info("{} project was saved",projectDTO);
+        log.info("{} project was saved", projectDTO.getProjectName());
     }
 
     @Override
     public void deleteProject(Long id) {
-        try{
+        try {
             projectRepository.deleteById(id);
-        } catch (Exception e){
-            log.error("Exception in deleting the project by id {} :: {} ",id,e);
+        } catch (Exception e) {
+            log.error("Exception in deleting the project by id {} :: {} ", id, e);
         }
-       log.info("Successfully deleted project with id :: {}",id);
+        log.info("Successfully deleted project with id :: {}", id);
     }
 
     @Override
     public ProjectDTO findProjectById(Long id) {
         ProjectDTO projectDTO = null;
-        try{
-            projectDTO = mapperUtil.convertToDTO(projectRepository.findById(id).get(),new ProjectDTO());
-        } catch (Exception e){
-            log.error("Exception in finding project by id {} :: {}",id,e);
+        try {
+            projectDTO = mapperUtil.convertToDTO(projectRepository.findById(id).get(), new ProjectDTO());
+        } catch (Exception e) {
+            log.error("Exception in finding project by id {} :: {}", id, e);
         }
         return projectDTO;
     }
 
     @Override
     public ProjectDTO updateProject(Long id, ProjectDTO projectDTO) {
-        try{
-            log.info("Updatind project with id {} :: {}",id,projectDTO);
+        try {
+            log.info("Updatind project with id {} :: {}", id, projectDTO);
             Project existingProject = projectRepository.findById(id).get();
             Project currentProject = mapperUtil.convertToEntity(projectDTO, new Project());
             currentProject.setId(id);
             currentProject.setInsertDateTime(existingProject.getInsertDateTime());
             currentProject.setInsertUserId(existingProject.getInsertUserId());
             projectRepository.save(currentProject);
-            log.info("Successfully updated project with id {} :: {}", id,currentProject);
-        } catch (Exception e){
-            log.error("Exception in updating project {} :: {}", id,projectDTO);
-            log.error("Exception was ::{}",e);
+            log.info("Successfully updated project with id {} :: {}", id, currentProject);
+        } catch (Exception e) {
+            log.error("Exception in updating project {} :: {}", id, projectDTO);
+            log.error("Exception was ::{}", e);
         }
         return findProjectById(id);
     }
@@ -107,12 +107,13 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<ProjectDTO> findAllActiveProjects() {
         List<Project> activeProjects = null;
-        try{
+        try {
             activeProjects = projectRepository.findAllByProjectStatusNotIn(List.of(Status.COMPLETE));
+            log.info("Getting all active projects :: {}", activeProjects);
         } catch (Exception e) {
             log.error("Exception in getting all active projects :: {}", e);
-          return Collections.emptyList();
+            return Collections.emptyList();
         }
-        return activeProjects.stream().map(p -> mapperUtil.convertToDTO(p,new ProjectDTO())).collect(Collectors.toList());
+        return activeProjects.stream().map(p -> mapperUtil.convertToDTO(p, new ProjectDTO())).collect(Collectors.toList());
     }
 }
