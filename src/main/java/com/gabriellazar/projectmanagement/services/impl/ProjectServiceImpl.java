@@ -13,7 +13,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -98,5 +102,17 @@ public class ProjectServiceImpl implements ProjectService {
             log.error("Exception was ::{}",e);
         }
         return findProjectById(id);
+    }
+
+    @Override
+    public List<ProjectDTO> findAllActiveProjects() {
+        List<Project> activeProjects = null;
+        try{
+            activeProjects = projectRepository.findAllByProjectStatusNotIn(List.of(Status.COMPLETE));
+        } catch (Exception e) {
+            log.error("Exception in getting all active projects :: {}", e);
+          return Collections.emptyList();
+        }
+        return activeProjects.stream().map(p -> mapperUtil.convertToDTO(p,new ProjectDTO())).collect(Collectors.toList());
     }
 }
