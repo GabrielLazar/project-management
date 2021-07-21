@@ -54,3 +54,7 @@ VALUES ('2021-01-01 00:00:00',1,'2021-01-01 04:00:00',1,
 INSERT INTO projects(insert_date_time, insert_user_id,  last_update_date_time, last_update_user_id,project_name,project_code,start_date,project_detail,project_status,user_id)
 VALUES ('2021-01-01 00:00:00',1,'2021-01-01 05:00:00',1,
 'Sports Scores Tracker','SST','2021-01-01','Application that tracks the sport results.','OPEN',2);
+--TASKS
+INSERT INTO tasks(insert_date_time, insert_user_id, last_update_date_time, last_update_user_id, task_subject,task_code, task_detail, task_status, assigned_date, user_id, project_id)
+VALUES ('2021-01-01 00:00:00',1,'2021-01-01 05:00:00',1,
+'Project setup','RPG-00001','Setting up the project for Random Password Generator','OPEN','2021-01-02',9,1)
