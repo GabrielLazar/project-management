@@ -19,6 +19,7 @@ public class Task extends BaseEntity {
 
     private String taskSubject;
     private String taskDetail;
+    private String taskCode;
 
     @Enumerated(EnumType.STRING)
     private Status taskStatus;
