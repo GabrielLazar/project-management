@@ -1,7 +1,6 @@
 package com.gabriellazar.projectmanagement.services.impl;
 
 import com.gabriellazar.projectmanagement.dto.TaskDTO;
-import com.gabriellazar.projectmanagement.entity.Project;
 import com.gabriellazar.projectmanagement.entity.Task;
 import com.gabriellazar.projectmanagement.enums.Status;
 import com.gabriellazar.projectmanagement.mapper.MapperUtil;
@@ -55,8 +54,40 @@ public class TaskServiceImpl implements TaskService {
 
     }
 
-    public Long getNextTaskCodeNumber() {
+    @Override
+    public TaskDTO findTaskById(Long id) {
+        TaskDTO taskDTO = null;
+        try{
+            taskDTO = taskRepository.findById(id).map(t -> mapperUtil.convertToDTO(t,new TaskDTO())).get();
+        } catch (Exception e){
+            log.error("Exception in finding task by id {} :: {}", id, e);
+        }
+        return taskDTO;
+    }
+
+    @Override
+    public TaskDTO updateTask(Long id, TaskDTO taskDTO) {
+        try {
+            log.info("Updating task with id {} :: {}", id, taskDTO);
+            Task existingTask = taskRepository.findById(id).get();
+            Task currentTask = mapperUtil.convertToEntity(taskDTO, new Task());
+            currentTask.setId(id);
+            currentTask.setInsertDateTime(existingTask.getInsertDateTime());
+            currentTask.setInsertUserId(existingTask.getInsertUserId());
+            currentTask.setAssignedDate(existingTask.getAssignedDate());
+            currentTask.setTaskCode(existingTask.getTaskCode());
+            taskRepository.save(currentTask);
+            log.info("Successfully updated task with id {} :: {}", id, currentTask);
+        } catch (Exception e) {
+            log.error("Exception in updating task {} :: {}", id, taskDTO);
+            log.error("Exception was ::{}", e);
+        }
+        return findTaskById(id);
+    }
+
+    private Long getNextTaskCodeNumber() {
         Long maxId = taskRepository.findMaxTaskId().orElse(0L);
         return ++maxId;
     }
+
 }

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <div th:replace="/fragments/head:: head">
+    </div>
+    <title>Update Task</title>
+</head>
+<body>
+<!-- ============================================================== -->
+<!-- main wrapper -->
+<!-- ============================================================== -->
+<div class="dashboard-main-wrapper">
+    <!-- ============================================================== -->
+    <!-- navbar -->
+    <!-- ============================================================== -->
+    <div th:replace="/fragments/navbar :: navbar"></div>
+    <!-- ============================================================== -->
+    <!-- end navbar -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- left sidebar -->
+    <!-- ============================================================== -->
+    <div th:replace="/fragments/side-bar :: sidebar">
+    </div>
+    <!-- ============================================================== -->
+    <!-- end left sidebar -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- wrapper  -->
+    <!-- ============================================================== -->
+    <div class="dashboard-wrapper">
+        <div class="dashboard-ecommerce">
+            <div class="container-fluid dashboard-content">
+                <!-- ============================================================== -->
+                <!-- pageheader  -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="page-header">
+                            <h2 class="mb-2">Update Task</h2>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- end pageheader  -->
+                <!-- ============================================================== -->
+                <form class="needs-validation" th:object="${task}" method="post" th:action="@{/manager/update-task/{id}(id=${task.id})}">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Project</label>
+                                <select name="project" class="custom-select" required="required">
+                                    <option  th:each="project : ${activeProjects}"
+                                             th:value="${project.id}"
+                                             th:text="${project.projectName}"
+                                             th:selected="(${project.id} == *{project.id})"></option>
+                                </select>
+                                <div class="invalid-feedback">Please choose project</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Assigned Employee</label>
+                                <select name="assignedUser" class="custom-select" required="required">
+                                    <option  th:each="assignedUser : ${employees}"
+                                             th:value="${assignedUser.userName}"
+                                             th:text="${assignedUser.firstName + ' ' + assignedUser.lastName}"
+                                             th:selected="(${assignedUser.id} == *{assignedUser.id})" ></option>
+                                </select>
+                                <div class="invalid-feedback">Please choose employee</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select  th:field="*{taskStatus}" class="custom-select" required="required">
+                                    <option  th:each="status : ${T(com.gabriellazar.projectmanagement.enums.Status).values()}"
+                                             th:value="${status}"
+                                             th:text="${status}"
+                                    ></option>
+                                </select>
+                                <div class="invalid-feedback">Please choose employee</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="col-form-label">Task Subject</label>
+                                <input th:field="*{taskSubject}" id="tasksubject" type="text" placeholder="Task subject" class="form-control">
+                                <div class="invalid-feedback">Please enter task subject.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Task Detail</label>
+                                <textarea th:field="*{taskDetail}" id="taskdetail" class="form-control" ></textarea>
+                                <div class="invalid-feedback">Please enter task detail</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="float-right">
+                                <button class="btn btn-success rounded-0" type="submit">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- ============================================================== -->
+
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="col-md-12 col-lg-12">
+                            <section class="panel">
+                                <header class="panel-heading">
+                                    <h2 class="panel-title">Tasks List</h2>
+                                </header>
+                                <div class="panel-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Project</th>
+                                                <th scope="col">TaskCode</th>
+                                                <th scope="col">Task Subject</th>
+                                                <th scope="col">Assigned Employee</th>
+                                                <th scope="col">Assigned Date</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="task : ${tasks}">
+                                                <th scope="col" th:text="${task.project.projectName}"></th>
+                                                <th scope="col" th:text="${task.taskCode}"></th>
+                                                <th scope="col" th:text="${task.taskSubject}"></th>
+                                                <th scope="col" th:text="${task.assignedUser.firstName} + ' ' + ${task.assignedUser.lastName}"></th>
+                                                <th scope="col" th:text="${task.assignedDate}"></th>
+                                                <th scope="col" th:text="${task.taskStatus}"></th>
+                                                <td>
+                                                    <a class="btn btn-warning rounded-0" th:href="@{/manager/update-task/{id}(id=${task.id})}">Update</a>
+                                                    <a class="btn btn-danger rounded-0">Delete</a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <p></p>
+                                        <div class="table-pagination" th:if="${totalNumberOfPages > 1}">
+                                            <ul class="pagination justify-content-center">
+                                                <li>
+                                                    <span class="page-link" th:unless="${currentPage != 1}">Previous</span>
+                                                    <a class="page-link" th:if="${currentPage != 1}"  th:href="@{/manager/create-task(page=${currentPage}-1)}">Previous</a>
+                                                </li>
+                                                <li th:each="page : ${#numbers.sequence(1,totalNumberOfPages)}">
+                                                    <span  class="page-link" th:unless="${currentPage != page}" th:text="${page}" style="color: #5969ff" ></span>
+                                                    <a class="page-link" th:if="${currentPage != page}"  th:href="@{/manager/create-task(page=${page})}" th:text="${page}"></a>
+                                                </li>
+                                                <li>
+                                                    <span class="page-link" th:unless="${currentPage < totalNumberOfPages}">Next</span>
+                                                    <a class="page-link" th:if="${currentPage < totalNumberOfPages}" th:href="@{/manager/create-task(page=${currentPage}+1)}">Next</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- end wrapper  -->
+                <!-- ============================================================== -->
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end main wrapper  -->
+    <!-- ============================================================== -->
+    <div th:replace="fragments/javascript :: js">
+    </div>
+</div>
+</body>
+<script>
+    (function () {
+        'use strict'
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+</html>
