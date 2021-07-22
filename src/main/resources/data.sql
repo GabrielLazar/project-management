@@ -57,4 +57,4 @@ VALUES ('2021-01-01 00:00:00',1,'2021-01-01 05:00:00',1,
 --TASKS
 INSERT INTO tasks(insert_date_time, insert_user_id, last_update_date_time, last_update_user_id, task_subject,task_code, task_detail, task_status, assigned_date, user_id, project_id)
 VALUES ('2021-01-01 00:00:00',1,'2021-01-01 05:00:00',1,
-'Project setup','RPG-00001','Setting up the project for Random Password Generator','OPEN','2021-01-02',9,1)
+'Project setup','RPG-1','Setting up the project for Random Password Generator','OPEN','2021-01-02',9,1)
