@@ -21,10 +21,6 @@ public class WebController {
         return "account";
     }
 
-    @RequestMapping("/create-task")
-    public String getTask(@ModelAttribute("user") UserDTO userDTO){
-        return "/task/create-task";
-    }
 
     @RequestMapping("archive")
     public String getArchived(@ModelAttribute("user") UserDTO userDTO){

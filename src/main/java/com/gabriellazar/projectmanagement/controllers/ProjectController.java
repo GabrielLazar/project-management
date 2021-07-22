@@ -3,7 +3,6 @@ package com.gabriellazar.projectmanagement.controllers;
 
 import com.gabriellazar.projectmanagement.dto.ProjectDTO;
 import com.gabriellazar.projectmanagement.dto.UserDTO;
-import com.gabriellazar.projectmanagement.entity.Project;
 import com.gabriellazar.projectmanagement.enums.Status;
 import com.gabriellazar.projectmanagement.services.ProjectService;
 import com.gabriellazar.projectmanagement.services.UserService;
