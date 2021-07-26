@@ -85,6 +85,16 @@ public class TaskServiceImpl implements TaskService {
         return findTaskById(id);
     }
 
+    @Override
+    public void deleteProject(Long id) {
+        try{
+            taskRepository.deleteById(id);
+        } catch (Exception e) {
+            log.error("Exception in deleting the task by id {} :: {} ", id, e);
+        }
+        log.info("Successfully deleted task with id :: {}", id);
+    }
+
     private Long getNextTaskCodeNumber() {
         Long maxId = taskRepository.findMaxTaskId().orElse(0L);
         return ++maxId;

@@ -10,6 +10,7 @@ public interface TaskService {
 
     Page<TaskDTO> findAllPageableTask(int pageNo, int pageSize);
     void saveTask(TaskDTO taskDTO);
+    void deleteProject(Long id);
     TaskDTO findTaskById(Long id);
     TaskDTO updateTask(Long id, TaskDTO taskDTO);
 
