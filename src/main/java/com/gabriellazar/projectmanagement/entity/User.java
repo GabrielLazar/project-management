@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-@ToString
+@ToString(exclude = {"password"})
 public class User extends BaseEntity {
 
     private String firstName;
