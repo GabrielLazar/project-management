@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 <div th:fragment="navbar">
     <div class="dashboard-header">
@@ -24,7 +25,7 @@
             >
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" sec:authorize="isAuthenticated()">
                 <ul class="navbar-nav ml-auto navbar-right-top">
                     <li class="nav-item dropdown nav-user">
                         <a
@@ -39,11 +40,11 @@
                         <div class="dropdown-menu dropdown-menu-right nav-user-dropdown"
                              aria-labelledby="navbarDropdownMenuLink2">
                             <div class="nav-user-info" style="background: deepskyblue">
-                                <h5 class="mb-0 text-white nav-user-name">Gabriel</h5>
+                                <h5 class="mb-0 text-white nav-user-name" sec:authentication="name"></h5>
                             </div>
                             <a class="dropdown-item" href="#"
                             ><i class="fas fa-user mr-2"></i>Account</a>
-                            <a class="dropdown-item" th:href="@{/}"
+                            <a class="dropdown-item" th:href="@{/logout}"
                             ><i class="fas fa-power-off mr-2"></i>Logout</a
                             >
                         </div>

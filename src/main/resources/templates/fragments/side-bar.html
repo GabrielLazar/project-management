@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 <div th:fragment="sidebar">
     <div class="nav-left-sidebar sidebar-dark">
@@ -19,7 +20,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav flex-column">
-                        <li class="nav-item">
+                        <li class="nav-item" sec:authorize="hasAnyAuthority('Admin', 'Manager')" >
                             <a
                                     class="nav-link"
                                     href="#"
@@ -43,7 +44,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" sec:authorize="hasAuthority('Manager')">
                             <a
                                     class="nav-link"
                                     href="#"
@@ -68,7 +69,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" sec:authorize="hasAuthority('Employee')">
                             <a
                                     class="nav-link"
                                     href="#"

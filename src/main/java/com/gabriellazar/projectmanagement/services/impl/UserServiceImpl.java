@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -23,6 +24,7 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
     private MapperUtil mapperUtil;
+    private BCryptPasswordEncoder passwordEncoder;
 
     public UserServiceImpl(@Lazy UserRepository userRepository, MapperUtil mapperUtil) {
         this.userRepository = userRepository;
@@ -54,7 +56,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(UserDTO userDTO) {
         try {
-            userRepository.save(mapperUtil.convertToEntity(userDTO, new User()));
+            User user = mapperUtil.convertToEntity(userDTO,new User());
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            userRepository.save(user);
         } catch (Exception e) {
             log.error("Exception in saving user :: {}", userDTO);
             log.error("Exception was :: {}", e);
