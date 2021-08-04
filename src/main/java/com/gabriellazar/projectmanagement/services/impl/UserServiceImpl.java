@@ -26,9 +26,10 @@ public class UserServiceImpl implements UserService {
     private MapperUtil mapperUtil;
     private BCryptPasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(@Lazy UserRepository userRepository, MapperUtil mapperUtil) {
+    public UserServiceImpl(@Lazy UserRepository userRepository, MapperUtil mapperUtil, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.mapperUtil = mapperUtil;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -58,22 +59,23 @@ public class UserServiceImpl implements UserService {
         try {
             User user = mapperUtil.convertToEntity(userDTO,new User());
             user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setEnabled(true);
             userRepository.save(user);
+            log.info("User was saved :: {}", userDTO);
         } catch (Exception e) {
             log.error("Exception in saving user :: {}", userDTO);
             log.error("Exception was :: {}", e);
         }
-        log.info("User was saved :: {}", userDTO);
     }
 
     @Override
     public void deleteUserById(Long id) {
         try {
             userRepository.deleteById(id);
+            log.info("Successfully deleted user with id :: {}", id);
         } catch (Exception e) {
             log.error("Exception when deleting user by id {} :: Exception {}", id, e);
         }
-        log.info("Successfully deleted user with id :: {}", id);
     }
 
     @Override
@@ -83,6 +85,14 @@ public class UserServiceImpl implements UserService {
             User user = userRepository.findById(id).get();
             User updatedUser = mapperUtil.convertToEntity(userDTO, new User());
             updatedUser.setId(user.getId());
+            updatedUser.setInsertDateTime(user.getInsertDateTime());
+            updatedUser.setInsertUserId(user.getInsertUserId());
+            updatedUser.setEnabled(true);
+            if(userDTO.getPassword().isEmpty()){
+                updatedUser.setPassword(user.getPassword());
+            } else {
+                updatedUser.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+            }
             userRepository.save(updatedUser);
             log.info("Successfully updated user :: {}", updatedUser);
         } catch (Exception e) {

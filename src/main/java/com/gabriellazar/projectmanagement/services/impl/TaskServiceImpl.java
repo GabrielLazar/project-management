@@ -47,10 +47,10 @@ public class TaskServiceImpl implements TaskService {
             taskDTO.setAssignedDate(LocalDate.now());
             taskDTO.setTaskCode(taskDTO.getProject().getProjectCode() + "-" + getNextTaskCodeNumber());
             taskRepository.saveAndFlush(mapperUtil.convertToEntity(taskDTO, new Task()));
+            log.info("{} task was saved", taskDTO.getTaskSubject());
         } catch (Exception e) {
             log.error("Exception in saving task :: {}, {}", taskDTO, e);
         }
-        log.info("{} task was saved", taskDTO.getTaskSubject());
 
     }
 
@@ -89,10 +89,10 @@ public class TaskServiceImpl implements TaskService {
     public void deleteProject(Long id) {
         try{
             taskRepository.deleteById(id);
+            log.info("Successfully deleted task with id :: {}", id);
         } catch (Exception e) {
             log.error("Exception in deleting the task by id {} :: {} ", id, e);
         }
-        log.info("Successfully deleted task with id :: {}", id);
     }
 
     private Long getNextTaskCodeNumber() {

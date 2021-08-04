@@ -58,21 +58,21 @@ public class ProjectServiceImpl implements ProjectService {
         try {
             projectDTO.setProjectStatus(Status.OPEN);
             projectRepository.saveAndFlush(mapperUtil.convertToEntity(projectDTO, new Project()));
+            log.info("{} project was saved", projectDTO.getProjectName());
         } catch (Exception e) {
             log.error("Exception in saving project :: {}", projectDTO);
             log.error("Exception saving project :: {}", e);
         }
-        log.info("{} project was saved", projectDTO.getProjectName());
     }
 
     @Override
     public void deleteProject(Long id) {
         try {
             projectRepository.deleteById(id);
+            log.info("Successfully deleted project with id :: {}", id);
         } catch (Exception e) {
             log.error("Exception in deleting the project by id {} :: {} ", id, e);
         }
-        log.info("Successfully deleted project with id :: {}", id);
     }
 
     @Override
