@@ -19,7 +19,7 @@ public class ProjectStatusController {
 
     @GetMapping("/project-status")
     public String getProjectStatus(Model model){
-        model.addAttribute("projects",projectService.findAllActiveProjects());
+        model.addAttribute("projects",projectService.findAllProjectsWithTasks());
         return "/manager/project-status/project-status";
     }
 }

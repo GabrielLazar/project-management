@@ -18,4 +18,5 @@ public interface ProjectService {
     ProjectDTO findProjectById(Long id);
     ProjectDTO updateProject(Long id, ProjectDTO projectDTO);
     List<ProjectDTO> findAllActiveProjects();
+    List<ProjectDTO> findAllProjectsWithTasks();
 }

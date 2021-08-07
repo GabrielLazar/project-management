@@ -16,4 +16,10 @@ public interface TaskRepository extends JpaRepository<Task,Long> {
 
     @Query(value = "SELECT MAX(id) FROM tasks",nativeQuery = true)
     Optional<Long> findMaxTaskId();
+
+    @Query(value = "SELECT COUNT(*) FROM tasks WHERE project_id = :id",nativeQuery = true)
+    Integer findAllTasksForProject(Long id);
+
+    @Query(value = "SELECT COUNT(*) FROM tasks WHERE project_id = :id AND task_status = 'COMPLETE' ",nativeQuery = true)
+    Integer findAllCompletedTasksForProject(Long id);
 }

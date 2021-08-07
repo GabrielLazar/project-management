@@ -5,6 +5,7 @@ import com.gabriellazar.projectmanagement.entity.Project;
 import com.gabriellazar.projectmanagement.enums.Status;
 import com.gabriellazar.projectmanagement.mapper.MapperUtil;
 import com.gabriellazar.projectmanagement.repository.ProjectRepository;
+import com.gabriellazar.projectmanagement.repository.TaskRepository;
 import com.gabriellazar.projectmanagement.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -26,11 +27,13 @@ public class ProjectServiceImpl implements ProjectService {
 
     private ProjectRepository projectRepository;
     private MapperUtil mapperUtil;
+    private TaskRepository taskRepository;
 
     @Autowired
-    public ProjectServiceImpl(@Lazy ProjectRepository projectRepository, MapperUtil mapperUtil) {
+    public ProjectServiceImpl(@Lazy ProjectRepository projectRepository, @Lazy TaskRepository taskRepository, MapperUtil mapperUtil) {
         this.projectRepository = projectRepository;
         this.mapperUtil = mapperUtil;
+        this.taskRepository = taskRepository;
     }
 
     @Override
@@ -115,5 +118,26 @@ public class ProjectServiceImpl implements ProjectService {
             return Collections.emptyList();
         }
         return activeProjects.stream().map(p -> mapperUtil.convertToDTO(p, new ProjectDTO())).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProjectDTO> findAllProjectsWithTasks() {
+        List<ProjectDTO> allProjectsWithTasks;
+        try{
+          allProjectsWithTasks = projectRepository.findAll()
+                  .stream()
+                  .map(project -> {
+                      ProjectDTO projectDTO = new ProjectDTO();
+                      projectDTO = mapperUtil.convertToDTO(project,projectDTO);
+                      projectDTO.setCompletedTasks(taskRepository.findAllCompletedTasksForProject(projectDTO.getId()));
+                      projectDTO.setTotalTasks(taskRepository.findAllTasksForProject(projectDTO.getId()));
+                      return projectDTO;
+                  }).collect(Collectors.toList());
+            log.info("Getting all projects with tasks :: {}", allProjectsWithTasks);
+        } catch (Exception e){
+            log.error("Exception in getting all projects with tasks :: {}", e);
+            return Collections.emptyList();
+        }
+        return allProjectsWithTasks;
     }
 }

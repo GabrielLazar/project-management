@@ -63,7 +63,7 @@
                         <td th:text="${project.projectName}"></td>
                         <td th:text="${project.startDate}"></td>
                         <td th:text="${project.user.firstName} + ' ' + ${project.user.lastName}"></td>
-                        <td></td>
+                        <td th:text="${project.completedTasks} + '/' + ${project.totalTasks}"></td>
                         <td th:text="${project.projectStatus}"></td>
                         <td>
                             <a class="btn btn-info rounded-0">Complete</a>
